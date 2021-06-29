@@ -7,7 +7,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
 
   before do
     ServicesIndex.reset!
-      wait_for_index(ServicesIndex)
+    wait_for_index(ServicesIndex)
   end
   describe 'successfully' do
     before do

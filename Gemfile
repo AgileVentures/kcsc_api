@@ -17,6 +17,7 @@ gem 'aasm'
 gem 'ahoy_matey'
 gem 'rest-client'
 gem 'chewy'
+gem 'geocoder'
 
 group :development, :test do
   gem 'coveralls', require: false

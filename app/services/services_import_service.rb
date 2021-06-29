@@ -48,6 +48,8 @@ module ServicesImportService
   end
 
   def self.full_address(address)
+    return address['address']['Street Address'] if address['address']['city'].blank?
+    return address['address']['city'] if address['address']['Street Address'].blank?
     "#{address['address']['Street Address']} #{address['address']['city']}"
   end
 

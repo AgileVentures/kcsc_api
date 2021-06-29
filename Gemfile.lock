@@ -313,6 +313,7 @@ DEPENDENCIES
   devise_token_auth
   elasticsearch-extensions
   factory_bot_rails
+  geocoder
   listen (~> 3.3)
   pg (~> 1.1)
   pry-rails
