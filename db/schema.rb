@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_105620) do
+ActiveRecord::Schema.define(version: 2021_06_29_093615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,32 +57,24 @@ ActiveRecord::Schema.define(version: 2021_06_19_105620) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
-  create_table "inquiries", force: :cascade do |t|
-    t.integer "size"
-    t.integer "office_type"
-    t.string "peers"
+  create_table "services", force: :cascade do |t|
+    t.datetime "imported_at"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "name"
+    t.text "description"
+    t.string "telephone"
     t.string "email"
-    t.integer "flexible"
-    t.string "phone"
-    t.string "locations", array: true
+    t.boolean "publish_address"
+    t.boolean "publish_telephone"
+    t.integer "charity_commission_id"
+    t.string "address"
+    t.string "postcode"
+    t.string "website"
+    t.integer "imported_id"
+    t.string "imported_from"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "inquiry_status"
-    t.bigint "broker_id"
-    t.integer "start_date"
-    t.boolean "started_email_sent"
-    t.string "language", null: false
-    t.index ["broker_id"], name: "index_inquiries_on_broker_id"
-  end
-
-  create_table "notes", force: :cascade do |t|
-    t.text "body"
-    t.bigint "inquiry_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "creator_id"
-    t.index ["creator_id"], name: "index_notes_on_creator_id"
-    t.index ["inquiry_id"], name: "index_notes_on_inquiry_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -113,6 +105,4 @@ ActiveRecord::Schema.define(version: 2021_06_19_105620) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "inquiries", "users", column: "broker_id"
-  add_foreign_key "notes", "users", column: "creator_id"
 end
