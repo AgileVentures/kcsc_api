@@ -14,3 +14,7 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+# hack for one acronym from KCSC, but need a better solution ...
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym 'ABI'
+end

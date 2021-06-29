@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope path: :api do
     mount Ahoy::Engine => "/ahoy"
     resources :analytics, only: :index
+    resources :organizations, only: :index
   end
 end
   

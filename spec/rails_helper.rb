@@ -28,7 +28,11 @@ RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveRecord, type: :model
   config.include ResponseJSON
   config.before(:each) do
-    stub_request(:post, Rails.application.credentials.dig(:slack, :webhook_url)).
-    to_return(status: 200, body: 'true', headers: {})
+    stub_request(:post, Rails.application.credentials.dig(:slack, :webhook_url))
+      .to_return(status: 200, body: 'true', headers: {})
+    stub_request(:get, /\/api\/self-care\/all/)
+      .to_return(status: 200, body: file_fixture("kcsc_api_response_organizations.json").read, headers: {})
+      stub_request(:get, /\/api\/self-care\/addresses\/all/)
+      .to_return(status: 200, body: file_fixture("kcsc_api_response_addresses.json").read, headers: {})
   end
 end
