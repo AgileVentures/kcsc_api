@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :organization do
+  factory :service do
     imported_at { "2021-06-29 11:36:15" }
     latitude { 1.5 }
     longitude { 1.5 }

@@ -1,7 +1,7 @@
-RSpec.describe Organization, type: :model do
+RSpec.describe Service, type: :model do
 
   it 'should have valid Factory' do
-    expect(create(:organization)).to be_valid
+    expect(create(:service)).to be_valid
   end
 
   describe 'Database table' do

@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_093615) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "services", force: :cascade do |t|
     t.datetime "imported_at"
     t.float "latitude"
     t.float "longitude"
