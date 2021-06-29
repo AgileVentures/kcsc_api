@@ -1,0 +1,67 @@
+{
+  "vid": 851,
+  "canonical-vid": 851,
+  "merged-vids": [],
+  "portal-id": 20246979,
+  "is-contact": true,
+  "properties": {
+    "phone": {
+      "value": "0707123456",
+      "versions": [
+        {
+          "value": "0707123456",
+          "source-type": "API",
+          "source-id": "nil",
+          "source-label": "nil",
+          "updated-by-user-id": "nil",
+          "timestamp": 1623846043999,
+          "selected": false
+        }
+      ]
+    },
+    "email": {
+      "value": "mrfake@fake.com",
+      "versions": [
+        {
+          "value": "mrfake@fake.com",
+          "source-type": "API",
+          "source-id": "nil",
+          "source-label": "nil",
+          "updated-by-user-id": "nil",
+          "timestamp": 1623846043999,
+          "selected": false
+        }
+      ]
+    }
+  },
+  "form-submissions": [],
+  "list-memberships": [],
+  "identity-profiles": [
+    {
+      "vid": 851,
+      "is-deleted": false,
+      "is-contact": false,
+      "pointer-vid": 0,
+      "previous-vid": 0,
+      "linked-vids": [],
+      "saved-at-timestamp": 0,
+      "deleted-changed-timestamp": 0,
+      "identities": [
+        {
+          "type": "EMAIL",
+          "value": "mrfake@fake.com",
+          "timestamp": 1623846044008,
+          "is-primary": true,
+          "source": "UNSPECIFIED"
+        },
+        {
+          "type": "LEAD_GUID",
+          "value": "11c80bc6-96cd-446d-b951-bcfff5fe9db4",
+          "timestamp": 1623846044100,
+          "source": "UNSPECIFIED"
+        }
+      ]
+    }
+  ],
+  "merge-audits": []
+}

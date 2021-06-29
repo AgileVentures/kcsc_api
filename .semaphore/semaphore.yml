@@ -1,0 +1,29 @@
+version: v1.0
+name: KCSC API
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      env_vars:
+        - name: DATABASE_URL
+          value: 'postgresql://postgres:@0.0.0.0:5432/myapp_test'
+        - name: RAILS_ENV
+          value: test
+      jobs:
+        - name: Test Runner
+          commands:
+            - checkout
+            - sem-service start postgres 11
+            - sem-version ruby 3.0.0
+            - cache restore
+            - bundle install --deployment --path vendor/bundle
+            - cache store
+            - bundle exec rake db:create
+            - bundle exec rake db:migrate
+            - COVERALLS_REPO_TOKEN=add_token_here bundle exec rails ci:tests
+      secrets:
+        - name: RAILS_MASTER_KEY
+

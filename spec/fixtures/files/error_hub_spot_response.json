@@ -1,0 +1,32 @@
+{
+  "message": "Contact already exists",
+  "identityProfile": {
+    "vid": 951,
+    "identity": [
+      {
+        "value": "steve@yahoo.se",
+        "type": "EMAIL",
+        "timestamp": 1623846568983,
+        "isPrimary": true
+      },
+      {
+        "value": "01c92460-6de3-4d3a-b8d4-d4a796d09425",
+        "type": "LEAD_GUID",
+        "timestamp": 1623846569026
+      }
+    ],
+    "linkedVid": [],
+    "isContact": true,
+    "savedAtTimestamp": 1623846569030
+  },
+  "errors": [
+    {
+      "message": "A contact with email steve@yahoo.se already exists.",
+      "in": "email"
+    }
+  ],
+  "status": "error",
+  "correlationId": "af70903a-c21e-4a00-939d-03c01973bfe3",
+  "category": "OBJECT_ALREADY_EXISTS",
+  "error": "CONTACT_EXISTS"
+}

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  username: postgres
+  database: kcsc_api_development
+
+test:
+  <<: *default
+  username: postgres
+  database: kcsc_api_test
+
+production:
+  <<: *default
+  database: kcsc_api_production
+  username: kcsc_api
+  password: <%= ENV['KCSC_API_API_DATABASE_PASSWORD'] %>
