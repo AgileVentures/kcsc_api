@@ -6,8 +6,9 @@ class SearchController < ApplicationController
                                   fields: %i[name description email website telephone],
                                   fuzziness: 'AUTO'
                                 })
+
     if query.any?
-      render json: serialize_collection(query.objects)
+      render json: { services: serialize_collection(query.objects) }
     else
       render json: { message: 'Your search yielded no results' }, status: 404
     end
@@ -16,12 +17,10 @@ class SearchController < ApplicationController
   private
 
   def serialize_collection(objects)
-    # binding.pry
     ActiveModel::SerializableResource.new(
       objects,
       each_serializer: Service::IndexSerializer,
-      adapter: :attributes,
-      root: 'services'
-    ).to_json
+      adapter: :attributes
+    )
   end
 end

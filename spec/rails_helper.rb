@@ -43,6 +43,8 @@ RSpec.configure do |config|
       .to_return(status: 200, body: file_fixture('kcsc_api_response_organizations.json').read, headers: {})
     stub_request(:get, %r{/api/self-care/addresses/all})
       .to_return(status: 200, body: file_fixture('kcsc_api_response_addresses.json').read, headers: {})
+    stub_request(:get, %r{/maps.googleapis.com/maps/api/geocode/})
+      .to_return(status: 200, body: file_fixture('google_geocode_api.json'), headers: {})
   end
 
   config.before(:suite) do
