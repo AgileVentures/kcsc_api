@@ -1,4 +1,9 @@
 RSpec.describe Organization, type: :model do
+
+  it 'should have valid Factory' do
+    expect(create(:organization)).to be_valid
+  end
+
   describe 'Database table' do
     it {
       is_expected.to have_db_column(:name)
@@ -57,7 +62,7 @@ RSpec.describe Organization, type: :model do
         .of_type(:boolean)
     }
     it {
-      is_expected.to have_db_column(:publish_telphone)
+      is_expected.to have_db_column(:publish_telephone)
         .of_type(:boolean)
     }
   end

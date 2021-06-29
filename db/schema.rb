@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_093615) do
     t.string "telephone"
     t.string "email"
     t.boolean "publish_address"
-    t.boolean "publish_telphone"
+    t.boolean "publish_telephone"
     t.integer "charity_commission_id"
     t.string "address"
     t.string "postcode"

@@ -16,6 +16,7 @@ gem 'pundit_helpers'
 gem 'aasm'
 gem 'ahoy_matey'
 gem 'rest-client'
+gem 'chewy'
 
 group :development, :test do
   gem 'coveralls', require: false
@@ -24,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'webmock'
+  gem 'elasticsearch-extensions'
 end
 
 group :development do

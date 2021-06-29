@@ -8,7 +8,7 @@ FactoryBot.define do
     telephone { "MyString" }
     email { "MyString" }
     publish_address { false }
-    publish_address { false }
+    publish_telephone { false }
     charity_commission_id { 1 }
     address { "MyString" }
     postcode { "MyString" }

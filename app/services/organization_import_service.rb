@@ -47,7 +47,7 @@ module OrganizationImportService
     model.telephone = contact['organisation']['OfficeMain-Phone-General Phone']
     model.email = contact['organisation']['OfficeMain-Email']
     model.website = contact['organisation']['Website']
-    model.publish_telphone = contact['organisation']['OfficeMain-Phone-General Phone'].blank? ? true : false
+    model.publish_telephone = contact['organisation']['OfficeMain-Phone-General Phone'].blank? ? true : false
     model.publish_address = true
     model.address = full_address(address)
     model.postcode = address['address']['postal_code'] || ''

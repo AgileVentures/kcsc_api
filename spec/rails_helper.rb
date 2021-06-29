@@ -5,6 +5,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'webmock/rspec'
+require 'elasticsearch/extensions/test/cluster'
+require 'chewy/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 require 'slack-notify'
 
@@ -18,6 +20,12 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+module ChewyHelper
+  def wait_for_index(index)
+    index.client.perform_request(:post, "#{index.index_name}/_flush")
+  end
+end
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -27,12 +35,17 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Shoulda::Matchers::ActiveRecord, type: :model
   config.include ResponseJSON
+  config.include ChewyHelper, type: :search_request
   config.before(:each) do
     stub_request(:post, Rails.application.credentials.dig(:slack, :webhook_url))
       .to_return(status: 200, body: 'true', headers: {})
-    stub_request(:get, /\/api\/self-care\/all/)
-      .to_return(status: 200, body: file_fixture("kcsc_api_response_organizations.json").read, headers: {})
-      stub_request(:get, /\/api\/self-care\/addresses\/all/)
-      .to_return(status: 200, body: file_fixture("kcsc_api_response_addresses.json").read, headers: {})
+    stub_request(:get, %r{/api/self-care/all})
+      .to_return(status: 200, body: file_fixture('kcsc_api_response_organizations.json').read, headers: {})
+    stub_request(:get, %r{/api/self-care/addresses/all})
+      .to_return(status: 200, body: file_fixture('kcsc_api_response_addresses.json').read, headers: {})
+  end
+
+  config.before(:suite) do
+    Chewy.strategy(:bypass)
   end
 end

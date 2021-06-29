@@ -9,7 +9,7 @@ class CreateOrganizations < ActiveRecord::Migration[6.1]
       t.string :telephone
       t.string :email
       t.boolean :publish_address
-      t.boolean :publish_telphone
+      t.boolean :publish_telephone
       t.integer :charity_commission_id
       t.string :address
       t.string :postcode
