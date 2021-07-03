@@ -12,11 +12,24 @@ module ServicesImportService
     addresses_response = RestClient.get "#{API_URL}#{ADDRESSES_PATH}#{KCSC_API_KEY}"
     kcsc_contacts = JSON.parse(response.body)['organisations']
     kcsc_contact_addresses = JSON.parse(addresses_response.body)['addresses']
+    clean_instances(kcsc_contacts)
     find_or_create_organisations(kcsc_contacts, kcsc_contact_addresses)
   end
 
   def self.response_has_content?(response)
     response.body && response.body != '{}'
+  end
+
+  def self.clean_instances(kcsc_contacts)
+    kcsc_contact_ids = []
+    service_ids = Service.all.pluck(:imported_id)
+    kcsc_contacts.each { |contact| kcsc_contact_ids << Integer(contact['organisation']['Contact ID']) }
+    missing = service_ids - kcsc_contact_ids
+    if missing.any?
+      missing.each do |id|
+        Service.find_by(imported_id: id).destroy!
+      end
+    end
   end
 
   def self.find_or_create_organisations(kcsc_contacts, kcsc_contact_addresses)
@@ -50,6 +63,7 @@ module ServicesImportService
   def self.full_address(address)
     return address['address']['Street Address'] if address['address']['city'].blank?
     return address['address']['city'] if address['address']['Street Address'].blank?
+
     "#{address['address']['Street Address']} #{address['address']['city']}"
   end
 
