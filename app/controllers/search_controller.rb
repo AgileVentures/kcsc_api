@@ -17,7 +17,7 @@ class SearchController < ApplicationController
   private
 
   def serialize_collection(objects)
-    ActiveModel::SerializableResource.new(
+    ActiveModelSerializers::SerializableResource.new(
       objects,
       each_serializer: Service::IndexSerializer,
       adapter: :attributes
