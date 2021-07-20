@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+  before_action :authenticate_request
+
+
   def create
     ServicesIndex.import
     query = ServicesIndex.query(multi_match: {
