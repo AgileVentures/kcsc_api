@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+  before_action :authenticate_request
+
+
   def create
     ServicesIndex.import
     query = ServicesIndex.query(multi_match: {
@@ -17,7 +20,7 @@ class SearchController < ApplicationController
   private
 
   def serialize_collection(objects)
-    ActiveModel::SerializableResource.new(
+    ActiveModelSerializers::SerializableResource.new(
       objects,
       each_serializer: Service::IndexSerializer,
       adapter: :attributes
