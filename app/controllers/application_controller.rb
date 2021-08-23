@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  before_action :authenticate_request
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Pundit
   include PunditHelpers

@@ -20,7 +20,7 @@ RSpec.describe 'POST /api/ahoy/visits', type: :request do
   end
 
   before do
-    post '/api/ahoy/visits', params: visit_data, headers: visit_headers
+    post '/api/ahoy/visits', params: visit_data, headers: visit_headers.merge!({ 'API_KEY' => 'whatever' })
     @visit = Ahoy::Visit.last
   end
 
