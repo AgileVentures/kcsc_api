@@ -1,4 +1,5 @@
 class AppDataController < ApplicationController
+  before_action :authenticate_user!, only: [:update]
   def show
     render json: AppData.as_json
   end
