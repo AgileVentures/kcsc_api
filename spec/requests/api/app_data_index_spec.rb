@@ -1,4 +1,4 @@
-RSpec.describe 'GET /api/app_data' do
+RSpec.describe 'GET /api/app_data', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
 
   describe 'with a valid api key' do

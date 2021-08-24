@@ -1,4 +1,4 @@
-RSpec.describe 'PUT /api/app_data' do
+RSpec.describe 'PUT /api/app_data', type: :request do
   def reset_app_data
     File.open(Rails.root.join('lib', AppData::DATA_FILE), 'w') { |f| f.write data.to_yaml }
   end
