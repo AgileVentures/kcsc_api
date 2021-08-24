@@ -1,129 +1,131 @@
 ---
-app_data:
-  testimonials:
-  - id: 1
-    name: Maggie Black
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+:app_data:
+  :testimonials:
+  - :id: 1
+    :name: Maggie Black
+    :text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    photo: https://freerangestock.com/sample/114840/a-caucasian-woman-posing-with-a-smile.jpg
-    alt: Maggie Black smiling to the camera
-  - id: 2
-    name: Richard Erricson
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    :photo: https://freerangestock.com/sample/114840/a-caucasian-woman-posing-with-a-smile.jpg
+    :alt: Maggie Black smiling to the camera
+  - :id: 2
+    :name: Richard Erricson
+    :text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-    photo: https://t3.ftcdn.net/jpg/01/15/46/70/360_F_115467073_9hWxkk2M8b4obn3Aq0JW3YDxtYt5nXqn.jpg
-    alt: Richard Erricson smiling to the camera
-  navigation:
-    main_tabs:
-    - label: home
-      link: "/home"
-    - label: services
-      link: "/services"
-      secondary_tabs:
-      - label: Find a service
-        link: "/services"
-        ref: find-a-service
-      - label: KCSC Self Care
-        link: "/services"
-        ref: kcsc-self-care
-      - label: KCSC CLW
-        link: "/services"
-        ref: kcsc-clw
-      - label: KCSC N Ken SC
-        link: "/services"
-        ref: kcsc-n-ken-sc
-      - label: Link workers
-        link: "/services"
-        ref: link-workers
-      - label: Other VCS lg contracts
-        link: "/services"
-        ref: other-vcs-lg-contracts
-    - label: about
-      link: "/about/organization"
-      secondary_tabs:
-      - label: organization
-        link: "/about/organization"
-      - label: self care
-        link: "/about/self_care"
-    - label: news & info
-      link: "/info/news"
-      secondary_tabs:
-      - label: news
-        link: "/info/news"
-      - label: information
-        link: "/info/information"
-    - label: contact
-      link: "/contact"
-    secondary_tabs:
-    - parent: about
-      label: organization
-      link: "/about/organization"
-    - parent: about
-      label: self care
-      link: "/about/self_care"
-    - parent: news & info
-      label: news
-      link: "/info/news"
-    - parent: news & info
-      label: information
-      link: "/info/information"
-    - parent: services
-      label: Find a service
-      link: "/services"
-      ref: find-a-service
-    - parent: services
-      label: KCSC Self Care
-      link: "/services"
-      ref: kcsc-self-care
-    - parent: services
-      label: KCSC CLW
-      link: "/services"
-      ref: kcsc-clw
-    - parent: services
-      label: KCSC N Ken SC
-      link: "/services"
-      ref: kcsc-n-ken-sc
-    - parent: services
-      label: Link workers
-      link: "/services"
-      ref: link-workers
-    - parent: services
-      label: Other VCS lg contracts
-      link: "/services"
-      ref: other-vcs-lg-contracts
-  contact:
-    email: info@communityhealthwestlondon.org.uk
-    phone: 0207-243 9806
-    form:
-    - placeholder: Purpose of inquiry
-      options:
+    :photo: https://t3.ftcdn.net/jpg/01/15/46/70/360_F_115467073_9hWxkk2M8b4obn3Aq0JW3YDxtYt5nXqn.jpg
+    :alt: Richard Erricson smiling to the camera
+  - :id: 1
+    :name: Thomas
+  :navigation:
+    :main_tabs:
+    - :label: home
+      :link: "/home"
+    - :label: services
+      :link: "/services"
+      :secondary_tabs:
+      - :label: Find a service
+        :link: "/services"
+        :ref: find-a-service
+      - :label: KCSC Self Care
+        :link: "/services"
+        :ref: kcsc-self-care
+      - :label: KCSC CLW
+        :link: "/services"
+        :ref: kcsc-clw
+      - :label: KCSC N Ken SC
+        :link: "/services"
+        :ref: kcsc-n-ken-sc
+      - :label: Link workers
+        :link: "/services"
+        :ref: link-workers
+      - :label: Other VCS lg contracts
+        :link: "/services"
+        :ref: other-vcs-lg-contracts
+    - :label: about
+      :link: "/about/organization"
+      :secondary_tabs:
+      - :label: organization
+        :link: "/about/organization"
+      - :label: self care
+        :link: "/about/self_care"
+    - :label: news & info
+      :link: "/info/news"
+      :secondary_tabs:
+      - :label: news
+        :link: "/info/news"
+      - :label: information
+        :link: "/info/information"
+    - :label: contact
+      :link: "/contact"
+    :secondary_tabs:
+    - :parent: about
+      :label: organization
+      :link: "/about/organization"
+    - :parent: about
+      :label: self care
+      :link: "/about/self_care"
+    - :parent: news & info
+      :label: news
+      :link: "/info/news"
+    - :parent: news & info
+      :label: information
+      :link: "/info/information"
+    - :parent: services
+      :label: Find a service
+      :link: "/services"
+      :ref: find-a-service
+    - :parent: services
+      :label: KCSC Self Care
+      :link: "/services"
+      :ref: kcsc-self-care
+    - :parent: services
+      :label: KCSC CLW
+      :link: "/services"
+      :ref: kcsc-clw
+    - :parent: services
+      :label: KCSC N Ken SC
+      :link: "/services"
+      :ref: kcsc-n-ken-sc
+    - :parent: services
+      :label: Link workers
+      :link: "/services"
+      :ref: link-workers
+    - :parent: services
+      :label: Other VCS lg contracts
+      :link: "/services"
+      :ref: other-vcs-lg-contracts
+  :contact:
+    :email: info@communityhealthwestlondon.org.uk
+    :phone: 0207-243 9806
+    :form:
+    - :placeholder: Purpose of inquiry
+      :options:
       - I have a question
       - I want to donate
       - I want to be a partner
-      type: dropdown
-      required: true
-      dataKey: purpose
-    - placeholder: Enter your name
-      type: text
-      required: true
-      multiline: false
-      dataKey: name
-    - placeholder: Enter your email
-      type: email
-      required: true
-      multiline: false
-      dataKey: email
-    - placeholder: Enter your message...
-      type: text
-      required: false
-      multiline: true
-      rows: 4
-      dataKey: message
-  about: Community Health West London is a Community Interest Company made up of six
-    local charities. We are working together with the wider community to improve the
-    health and wellbeing of our residents.
-  disclamers:
-    copyright: 2021 All Rights Reserved by Community Health West London.
-    accessability: This site is built according to Web Content Accessibility Guidlines
+      :type: dropdown
+      :required: true
+      :dataKey: purpose
+    - :placeholder: Enter your name
+      :type: text
+      :required: true
+      :multiline: false
+      :dataKey: name
+    - :placeholder: Enter your email
+      :type: email
+      :required: true
+      :multiline: false
+      :dataKey: email
+    - :placeholder: Enter your message...
+      :type: text
+      :required: false
+      :multiline: true
+      :rows: 4
+      :dataKey: message
+  :about: Community Health West London is a Community Interest Company made up of
+    six local charities. We are working together with the wider community to improve
+    the health and wellbeing of our residents.
+  :disclamers:
+    :copyright: '3000'
+    :accessability: This site is built according to Web Content Accessibility Guidlines
