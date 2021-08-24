@@ -1,7 +1,5 @@
 RSpec.describe AppData, type: :model do
-  subject { described_class }
-
-  after do
+  def reset_app_data
     File.open(Rails.root.join('lib', AppData::DATA_FILE), 'w') { |f| f.write data.to_yaml }
   end
 
@@ -13,11 +11,16 @@ RSpec.describe AppData, type: :model do
     } }
   end
 
-  before do
-    stub_const("AppData::DATA_FILE", 'test_data.yml')
-    allow(subject).to receive(:data).and_return(data)
-  end
+  subject { described_class }
 
+  before(:each) do
+    stub_const('AppData::DATA_FILE', 'test_data.yml')
+    reset_app_data
+  end
+  after { reset_app_data }
+
+  before do
+  end
   it { is_expected.to respond_to(:data) }
   it { is_expected.to respond_to(:sections) }
   it { is_expected.to respond_to(:update) }
@@ -38,7 +41,7 @@ RSpec.describe AppData, type: :model do
   end
 
   describe '#update' do
-    describe 'a .string_value after successful update' do
+    describe '.string_value after successful update' do
       before do
         described_class.update(:string_value, 'A new string')
       end
@@ -46,13 +49,23 @@ RSpec.describe AppData, type: :model do
       it { expect(subject.string_value).to eq 'A new string' }
     end
 
-    describe 'a .array_of_objects after successful update' do
+    describe '.array_of_objects after successful update' do
       let(:expected_outcome) { [{ id: 1, name: 'One' }, { id: 2, name: 'Two' }, { id: 3, name: 'Three' }] }
       before do
         described_class.update(:array_of_objects, [{ id: 3, name: 'Three' }])
       end
 
       it { expect(subject.array_of_objects).to eq expected_outcome }
+    end
+
+    describe '.object after successful update' do
+      let(:expected_outcome) { { key: 'new value', another_key: 'another new value', new_key: 'more contnet' } }
+      before do
+        described_class.update(:object,
+                               { key: 'new value', another_key: 'another new value', new_key: 'more contnet' })
+      end
+
+      it { expect(subject.object).to eq expected_outcome }
     end
   end
 end

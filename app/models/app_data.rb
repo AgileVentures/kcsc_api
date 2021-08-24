@@ -13,7 +13,7 @@ class AppData
   end
 
   def self.method_missing(*args, &block)
-    super unless sections.include?(*args )
+    super unless sections.include?(*args)
     item = data[:app_data][*args]
     case item
     when Array
@@ -44,8 +44,8 @@ class AppData
                   else
                     { section => update }
                   end
-    new_data = { **data[:app_data], **new_content }
-    yaml = { app_data: new_data }.to_yaml
+                  new_data = { **data[:app_data], **new_content }
+                  yaml = { app_data: new_data }.to_yaml
     File.open(Rails.root.join('lib', DATA_FILE), 'w') { |f| f.write yaml }
   end
 end
