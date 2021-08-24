@@ -4,5 +4,8 @@ class ArticlesController < ApplicationController
     render json: { articles: articles }
   end
 
-  def show; end
+  def show
+    article = Article.find(params[:id])
+    render json: { article: article }
+  end
 end
