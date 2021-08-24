@@ -10,7 +10,7 @@ RSpec.describe 'GET /api/app_data' do
       expect(response).to have_http_status 200
     end
 
-    it 'is expected to respond with a list of 337 services' do
+    it 'is expected to respond with an object with 5 keys' do
       expect(response_json['app_data'].keys.count).to eq 5
     end
   end
