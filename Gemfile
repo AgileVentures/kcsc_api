@@ -28,6 +28,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'webmock'
   gem 'elasticsearch-extensions'
+  gem 'faker'
 end
 
 group :development do

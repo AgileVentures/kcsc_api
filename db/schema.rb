@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_130536) do
+ActiveRecord::Schema.define(version: 2021_08_25_080509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,9 +60,10 @@ ActiveRecord::Schema.define(version: 2021_08_24_130536) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.string "author"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -81,13 +82,6 @@ ActiveRecord::Schema.define(version: 2021_08_24_130536) do
     t.string "website"
     t.integer "imported_id"
     t.string "imported_from"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "settings", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -120,4 +114,5 @@ ActiveRecord::Schema.define(version: 2021_08_24_130536) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "articles", "users", column: "author_id"
 end

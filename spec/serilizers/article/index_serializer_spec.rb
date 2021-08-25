@@ -13,7 +13,7 @@ RSpec.describe Article::IndexSerializer, type: :serializer do
   end
 
   it 'is expected to contain relevant keys for each object' do
-    expected_keys = %w[id title teaser date image]
+    expected_keys = %w[id title teaser date image author]
     expect(subject['articles'].last.keys).to match expected_keys
   end
 end

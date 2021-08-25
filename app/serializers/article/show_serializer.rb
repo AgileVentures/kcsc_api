@@ -1,5 +1,6 @@
 class Article::ShowSerializer < ActiveModel::Serializer
   attributes :id, :id, :title, :body, :date, :image
+  belongs_to :author, serializer: Users::Serializer
 
   def date
     object.created_at.strftime('%Y-%m-%d')
