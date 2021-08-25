@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :analytics, only: :index
     resources :services, only: :index
     resources :search, only: :create
+    resources :articles, only: %i[index show]
     resource :app_data, only: %i[show update]
   end
 end
