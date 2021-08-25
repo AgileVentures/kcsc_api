@@ -9,7 +9,6 @@ class AppDataController < ApplicationController
     value = permitted_value
     begin
       AppData.update(key, value)
-      # AppData.update(key, value.to_h.symbolize_keys)
       render json: AppData.send(key)
     rescue StandardError => e
       render json: { error: e }, status: 422
