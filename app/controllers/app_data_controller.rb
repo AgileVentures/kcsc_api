@@ -9,6 +9,7 @@ class AppDataController < ApplicationController
     value = permitted_value
     begin
       AppData.update(key, value)
+      # AppData.update(key, value.to_h.symbolize_keys)
       render json: AppData.send(key)
     rescue StandardError => e
       render json: { error: e }, status: 422
@@ -18,8 +19,12 @@ class AppDataController < ApplicationController
   def permitted_value
     if params[:value].is_a? String
       params[:value]
+    elsif params[:value].respond_to? :keys
+      Number.convert(params.require(:value).permit!.to_h.symbolize_keys)
     else
       params.require(:value).permit!
     end
   end
 end
+
+

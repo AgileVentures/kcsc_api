@@ -38,14 +38,21 @@ class AppData
     content = send(section)
     new_content = case content
                   when Array
-                    { section => [*content, *update] }
+                    existing_item = content.detect { |item| item[:id].to_i == update[:id].to_i }
+                    if existing_item && existing_item.any?
+                      index = content.find_index(existing_item)
+                      content[index] = update
+                      { section => content }
+                    else
+                      { section => content.push(update) }
+                    end
                   when Hash
                     { section => { **content, **update } }
                   else
                     { section => update }
                   end
-                  new_data = { **data[:app_data], **new_content }
-                  yaml = { app_data: new_data }.to_yaml
+    new_data = { **data[:app_data], **new_content }
+    yaml = { app_data: new_data }.to_yaml
     File.open(Rails.root.join('lib', DATA_FILE), 'w') { |f| f.write yaml }
   end
 end

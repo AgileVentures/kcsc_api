@@ -50,12 +50,23 @@ RSpec.describe AppData, type: :model do
     end
 
     describe '.array_of_objects after successful update' do
-      let(:expected_outcome) { [{ id: 1, name: 'One' }, { id: 2, name: 'Two' }, { id: 3, name: 'Three' }] }
-      before do
-        described_class.update(:array_of_objects, [{ id: 3, name: 'Three' }])
+      describe 'adding a new object' do
+        let(:expected_outcome) { [{ id: 1, name: 'One' }, { id: 2, name: 'Two' }, { id: 3, name: 'Three' }] }
+        before do
+          described_class.update(:array_of_objects, { id: 3, name: 'Three' })
+        end
+
+        it { expect(subject.array_of_objects).to eq expected_outcome }
       end
 
-      it { expect(subject.array_of_objects).to eq expected_outcome }
+      describe 'updating an existing object' do
+        let(:expected_outcome) { [{ id: 1, name: 'One' }, { id: 2, name: 'A New Two' }] }
+        before do
+          described_class.update(:array_of_objects, { id: 2, name: 'A New Two' })
+        end
+
+        it { expect(subject.array_of_objects).to eq expected_outcome }
+      end
     end
 
     describe '.object after successful update' do

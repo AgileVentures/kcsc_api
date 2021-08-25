@@ -1,6 +1,11 @@
 ---
 :app_data:
   :about: We are all about doing good
+  :testimonials:
+  - :id: 1
+    :foo: bar
+  - :id: 2
+    :foo: baz
   :disclaimers:
     :one: value
     :two: another value
