@@ -7,6 +7,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
+require_relative '../lib/convert.rb'
 Bundler.require(*Rails.groups)
 
 module KCSCApi
