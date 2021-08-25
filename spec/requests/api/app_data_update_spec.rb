@@ -11,6 +11,7 @@ RSpec.describe 'PUT /api/app_data', type: :request do
   let(:data) do
     { app_data: {
       about: 'We are all about doing good',
+      testimonials: [{ id: 1, foo: 'bar' }, { id: 2, foo: 'baz' }],
       disclaimers: { one: 'value', two: 'another value' }
     } }
   end
@@ -78,6 +79,24 @@ RSpec.describe 'PUT /api/app_data', type: :request do
 
       it 'is expected to respond with status 401' do
         expect(response).to have_http_status 401
+      end
+    end
+  end
+
+  describe '#testimonials section' do
+    describe 'sending in an existing object' do
+      before do
+        put '/api/app_data', params: { key: 'testimonials',
+                                       value: { id: 1, foo: 'new value' } },
+                             headers: valid_auth_headers_for_user
+      end
+
+      it 'is expected to respond with status 200' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to update AppData.testimonials' do
+        expect(AppData.testimonials).to eq([{ id: 1, foo: 'new value' }, { id: 2, foo: 'baz' }])
       end
     end
   end

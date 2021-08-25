@@ -38,7 +38,7 @@ class AppData
     content = send(section)
     new_content = case content
                   when Array
-                    existing_item = content.detect { |item| item[:id] == update[:id] }
+                    existing_item = content.detect { |item| item[:id].to_i == update[:id].to_i }
                     if existing_item && existing_item.any?
                       index = content.find_index(existing_item)
                       content[index] = update
