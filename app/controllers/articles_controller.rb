@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :update]
   def index
     articles = Article.all
     render json: articles, each_serializer: Article::IndexSerializer
@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     if article.persisted?
       render json: article, serializer: Article::ShowSerializer, status: 201
     else
-      render json: article.errors.full_messages.to_sentence, status: 422
+      render json: { message: article.errors.full_messages.to_sentence }, status: 422
     end
   end
 
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
     else
-      render json: article.errors.full_messages.to_sentence, status: 422
+      render json: { message: article.errors.full_messages.to_sentence }, status: 422
     end
   end
 
