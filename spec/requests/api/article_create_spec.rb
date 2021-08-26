@@ -17,15 +17,19 @@ RSpec.describe 'POST /api/articles' do
     it { is_expected.to have_http_status(:created) }
 
     it 'is expected to return the article title' do
-      expect(response_json['article']['title']).to eq('Test Article')
+      expect(response_json['article']['title']).to eq 'Test Article'
     end
 
     it 'is expected to return the article body' do
-      expect(response_json['article']['body']).to eq('This is a test article')
+      expect(response_json['article']['body']).to eq 'This is a test article' 
     end
 
     it 'is expected to return the article author' do
-      expect(response_json['article']['author']['name']).to eq(Article.last.author.name)
+      expect(response_json['article']['author']['name']).to eq Article.last.author.name
+    end
+
+    it 'is expected to set published to true' do
+      expect(response_json['article']['published']).to eq true
     end
   end
 end

@@ -1,5 +1,5 @@
 class Article::IndexSerializer < ActiveModel::Serializer
-  attributes :id, :title, :teaser, :date, :image
+  attributes :id, :title, :teaser, :date, :image, :published
   belongs_to :author, serializer: Users::Serializer
 
   def teaser
