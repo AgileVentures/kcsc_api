@@ -3,21 +3,37 @@ RSpec.describe 'PUT /api/articles/:id' do
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let(:valid_auth_headers_for_user) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key }.merge!(credentials) }
-  let(:article) { create(:article, author: user) }
+  let(:article) { create(:article, author: user, published: false) }
 
   subject { response }
   
-  context 'with valid auth headers and params' do
-    before do
-      put "/api/articles/#{article.id}",
-          params: { article: { title: 'New Title' } },
-          headers: valid_auth_headers_for_user
+  describe 'with valid auth headers and params' do
+    describe 'for changing title' do
+      before do
+        put "/api/articles/#{article.id}",
+            params: { article: { title: 'New Title' } },
+            headers: valid_auth_headers_for_user
+      end
+  
+      it { is_expected.to have_http_status 200 }
+  
+      it 'is expected to update the article title' do
+        expect(article.reload.title).to eq 'New Title'
+      end
     end
 
-    it { is_expected.to have_http_status 200 }
-
-    it 'is expected to update the article title' do
-      expect(article.reload.title).to eq 'New Title'
+    describe 'for publishing article' do
+      before do
+        put "/api/articles/#{article.id}",
+            params: { article: { published: true } },
+            headers: valid_auth_headers_for_user
+      end
+  
+      it { is_expected.to have_http_status 200 }
+  
+      it 'is expected to update the article title' do
+        expect(article.reload.published).to eq true
+      end
     end
   end
 
