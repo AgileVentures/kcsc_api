@@ -15,7 +15,16 @@ class ArticlesController < ApplicationController
     if article.persisted?
       render json: article, serializer: Article::ShowSerializer, status: 201
     else
-      render json: article.errors.full_messages.to_sentence, status: :unprocessable_entity
+      render json: article.errors.full_messages.to_sentence, status: 422
+    end
+  end
+
+  def update
+    article = Article.find(params[:id])
+    if article.update(article_params)
+      render json: article, serializer: Article::ShowSerializer
+    else
+      render json: article.errors.full_messages.to_sentence, status: 422
     end
   end
 
