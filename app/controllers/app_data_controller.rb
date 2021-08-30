@@ -9,7 +9,7 @@ class AppDataController < ApplicationController
     value = permitted_value
     begin
       AppData.update(key, value)
-      render json: AppData.send(key)
+      render json: { message: "#{key} info has been updated" }
     rescue StandardError => e
       render json: { error: e }, status: 422
     end
@@ -25,5 +25,3 @@ class AppDataController < ApplicationController
     end
   end
 end
-
-
