@@ -22,24 +22,21 @@ app_data:
     - label: services
       link: "/services"
       secondary_tabs:
-      - label: Find a service
+      - label: "Find a service"
         link: "/services"
-        ref: find-a-service
-      - label: KCSC Self Care
+        ref: "find-a-self-care-service"
+      - label: "Long term Self Care"
         link: "/services"
-        ref: kcsc-self-care
-      - label: KCSC CLW
+        ref: "long-term-self-care"
+      - label: "Mental health"
         link: "/services"
-        ref: kcsc-clw
-      - label: KCSC N Ken SC
+        ref: "mental-health"
+      - label: "n.kensington self-care"
         link: "/services"
-        ref: kcsc-n-ken-sc
-      - label: Link workers
+        ref: "north-kensington-self-care"
+      - label: "find a link workers"
         link: "/services"
-        ref: link-workers
-      - label: Other VCS lg contracts
-        link: "/services"
-        ref: other-vcs-lg-contracts
+        ref: "find-a-link-workers"
     - label: about
       link: "/about/organization"
       secondary_tabs:
@@ -48,12 +45,12 @@ app_data:
       - label: self care
         link: "/about/self_care"
     - label: news & info
-      link: "/info/news"
+      link: "/news_info/news"
       secondary_tabs:
       - label: news
-        link: "/info/news"
+        link: "/news_info/news"
       - label: information
-        link: "/info/information"
+        link: "/news_info/information"
     - label: contact
       link: "/contact"
     secondary_tabs:
@@ -65,34 +62,30 @@ app_data:
       link: "/about/self_care"
     - parent: news & info
       label: news
-      link: "/info/news"
+      link: "/news_info/news"
     - parent: news & info
       label: information
-      link: "/info/information"
+      link: "/news_info/information"
     - parent: services
-      label: Find a service
+      label: "Find a service"
       link: "/services"
-      ref: find-a-service
+      ref: "find-a-self-care-service"
     - parent: services
-      label: KCSC Self Care
+      label: "Long term Self Care"
       link: "/services"
-      ref: kcsc-self-care
+      ref: "long-term-self-care"
     - parent: services
-      label: KCSC CLW
+      label: "Mental health"
       link: "/services"
-      ref: kcsc-clw
+      ref: "mental-health"
     - parent: services
-      label: KCSC N Ken SC
+      label: "n.kensington self-care"
       link: "/services"
-      ref: kcsc-n-ken-sc
+      ref: "north-kensington-self-care"
     - parent: services
-      label: Link workers
+      label: "find a link workers"
       link: "/services"
-      ref: link-workers
-    - parent: services
-      label: Other VCS lg contracts
-      link: "/services"
-      ref: other-vcs-lg-contracts
+      ref: "find-a-link-workers"
   contact:
     email: info@communityhealthwestlondon.org.uk
     phone: 0207-243 9806
