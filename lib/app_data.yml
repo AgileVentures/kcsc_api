@@ -8,7 +8,7 @@
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     :photo: https://freerangestock.com/sample/114840/a-caucasian-woman-posing-with-a-smile.jpg
     :alt: Maggie Black smiling to the camera
-    :link: /news_info/news/1
+    :link: /news_info/news/articles/1
   - :id: 2
     :name: Richard Erricson
     :text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -16,7 +16,7 @@
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
     :photo: https://t3.ftcdn.net/jpg/01/15/46/70/360_F_115467073_9hWxkk2M8b4obn3Aq0JW3YDxtYt5nXqn.jpg
     :alt: Richard Erricson smiling to the camera
-    :link: /news_info/news/2
+    :link: /news_info/news/articles/2
   :navigation:
     :main_tabs:
     - label: home
