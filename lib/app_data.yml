@@ -79,18 +79,23 @@
     - parent: services
       label: Find a service
       link: "/services"
+      ref: find-a-self-care-service
     - parent: services
       label: Long term Self Care
       link: "/services"
+      ref: long-term-self-care
     - parent: services
       label: Mental health
       link: "/services"
+      ref: mental-health
     - parent: services
       label: n.kensington self-care
       link: "/services"
+      ref: north-kensington-self-care
     - parent: services
       label: find a link workers
       link: "/services"
+      ref: find-a-link-workers
     - parent: about
       label: organization
       link: "/about/organization"
