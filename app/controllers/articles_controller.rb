@@ -12,8 +12,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    binding.pry
     article = Article.create(article_params.merge!(author: current_user))
-    if article.persisted?
+    if article.persisted? && attach_image(article)
       render json: article, serializer: Article::ShowSerializer, status: 201
     else
       render_error(article)
@@ -33,10 +34,13 @@ class ArticlesController < ApplicationController
 
   def render_error(article)
     render json: { message: article.errors.full_messages.to_sentence }, status: 422
-
   end
 
   def article_params
     params.require(:article).permit(:title, :body, :published)
+  end
+
+  def attach_image(article)
+    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], article.image)
   end
 end
