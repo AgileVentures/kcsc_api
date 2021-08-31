@@ -12,6 +12,7 @@ RSpec.describe Article, type: :model do
 
   describe 'Associations' do
     it { is_expected.to belong_to(:author).class_name('User') }
+    it { is_expected.to have_one(:image) }
   end
 
   describe 'Database' do

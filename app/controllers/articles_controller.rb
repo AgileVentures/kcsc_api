@@ -12,7 +12,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    binding.pry
     article = Article.create(article_params.merge!(author: current_user))
     if article.persisted? && attach_image(article)
       render json: article, serializer: Article::ShowSerializer, status: 201
@@ -41,6 +40,6 @@ class ArticlesController < ApplicationController
   end
 
   def attach_image(article)
-    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], article.image)
+    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article))
   end
 end
