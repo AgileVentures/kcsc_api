@@ -1,7 +1,8 @@
 RSpec.describe Article, type: :model do
+  let(:image) { build(:image) }
   describe 'Factory' do
-    it 'is expected to have valid Factory' do
-      expect(create(:article)).to be_valid
+    it 'is expected to have valid basic Factory' do
+      expect(create(:article, image: image)).to be_valid
     end
   end
 

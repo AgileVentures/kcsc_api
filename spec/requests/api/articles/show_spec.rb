@@ -1,11 +1,12 @@
 RSpec.describe 'GET /api/articles/:id', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
-  let!(:article_1) { create(:article, title: 'My Awesome Article') }
+  let(:image) { create(:associated_image) }
+  let!(:article) { create(:article, image: image, title: 'My Awesome Article') }
 
   subject { response }
   describe 'with valid api key' do
     before do
-      get "/api/articles/#{article_1.id}", headers: { API_KEY: api_key }
+      get "/api/articles/#{article.id}", headers: { API_KEY: api_key }
     end
 
     it { is_expected.to have_http_status 200 }
@@ -19,7 +20,7 @@ RSpec.describe 'GET /api/articles/:id', type: :request do
 
   describe 'with invalid api key' do
     before do
-      get "/api/articles/#{article_1.id}", headers: { API_KEY: 'invalid_key' }
+      get "/api/articles/#{article.id}", headers: { API_KEY: 'invalid_key' }
     end
 
     it { is_expected.to have_http_status 401 }

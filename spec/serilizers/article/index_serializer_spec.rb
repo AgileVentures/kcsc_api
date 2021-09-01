@@ -1,5 +1,6 @@
 RSpec.describe Article::IndexSerializer, type: :serializer do
-  let(:articles) { create_list(:article, 3) }
+  let(:image) { create(:associated_image) }
+  let(:articles) { create_list(:article, 3, image: image) }
   let(:serialization) do
     ActiveModelSerializers::SerializableResource.new(
       articles,

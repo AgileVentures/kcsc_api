@@ -5,7 +5,7 @@ module DecodeService
     io = StringIO.new
     io.puts(decoded_data)
     io.rewind
-    target.image.attach(io: io, filename: "attachment.#{image[:extension]}")
+    target.file.attach(io: io, filename: "attachment.#{image[:extension]}")
   end
 
   def self.split_base64_string(string)

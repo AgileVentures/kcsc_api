@@ -1,5 +1,6 @@
 RSpec.describe Article::ShowSerializer, type: :serializer do
-  let(:article) { create(:article) }
+  let(:image) { create(:associated_image) }
+  let(:article) { create(:article, image: image) }
   let(:serialization) do
     ActiveModelSerializers::SerializableResource.new(article, serializer: described_class)
   end
