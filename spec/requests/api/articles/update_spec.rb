@@ -3,7 +3,8 @@ RSpec.describe 'PUT /api/articles/:id' do
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
   let(:valid_auth_headers_for_user) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key }.merge!(credentials) }
-  let(:article) { create(:article, author: user, published: false) }
+  let(:image) { create(:associated_image) }
+  let(:article) { create(:article,  image: image, author: user, published: false) }
 
   subject { response }
   

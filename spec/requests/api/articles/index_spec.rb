@@ -1,6 +1,7 @@
 RSpec.describe 'GET /api/articles', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
-  let!(:articles) { 5.times { create(:article) } }
+  let!(:image) { create(:associated_image) }
+  let!(:articles) { 5.times { create(:article, image: image) } }
 
   subject { response }
 
@@ -20,7 +21,7 @@ RSpec.describe 'GET /api/articles', type: :request do
     before do
       get '/api/articles', headers: { API_KEY: 'invalid_key' }
     end
-    
+
     it { is_expected.to have_http_status 401 }
   end
 end

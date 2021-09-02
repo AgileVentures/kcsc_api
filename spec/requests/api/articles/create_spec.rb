@@ -1,6 +1,9 @@
 RSpec.describe 'POST /api/articles' do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let(:user) { create(:user) }
+  let(:image) do
+    File.read(fixture_path + '/files/image.txt')
+  end
   let(:credentials) { user.create_new_auth_token }
   let(:valid_auth_headers_for_user) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key }.merge!(credentials) }
 
@@ -10,7 +13,7 @@ RSpec.describe 'POST /api/articles' do
     before do
       post '/api/articles',
            params: { article:
-            { title: 'Test Article', body: 'This is a test article' } },
+            { title: 'Test Article', body: 'This is a test article', image: image } },
            headers: valid_auth_headers_for_user
     end
 
