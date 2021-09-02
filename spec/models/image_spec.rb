@@ -5,9 +5,9 @@ RSpec.describe Image, type: :model do
       expect(create(:image, article: article)).to be_valid
     end
 
-    # it 'is expected to have valid basic Factory' do
-    #   expect(build(:associated_image)).to be_valid
-    # end
+    it 'is expected to have valid basic Factory' do
+      expect(build(:associated_image)).to be_valid
+    end
   end
   describe 'db table' do
     it { is_expected.to have_db_column(:alt_text).of_type(:string) }
