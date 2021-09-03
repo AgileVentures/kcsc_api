@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_140048) do
+ActiveRecord::Schema.define(version: 2021_09_03_110924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,11 +104,13 @@ ActiveRecord::Schema.define(version: 2021_08_31_140048) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.text "header"
-    t.string "variant"
+    t.bigint "view_id", null: false
+    t.string "header"
     t.text "description"
+    t.integer "variant"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["view_id"], name: "index_sections_on_view_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -159,8 +161,15 @@ ActiveRecord::Schema.define(version: 2021_08_31_140048) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "views", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "images", "articles"
+  add_foreign_key "sections", "views"
 end
