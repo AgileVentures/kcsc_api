@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :section do
-    view { nil }
+    view 
     header { "MyString" }
     description { "MyText" }
     variant { 1 }

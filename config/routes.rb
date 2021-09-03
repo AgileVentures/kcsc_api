@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :search, only: :create
     resources :articles, only: %i[index show create update]
     resource :app_data, only: %i[show update]
+    resource :sections, only: %i[show]
   end
 end

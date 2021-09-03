@@ -1,5 +1,19 @@
-require 'rails_helper'
-
 RSpec.describe View, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Factory' do
+    it 'is expected to have valid basic Factory' do
+      expect(create(:view)).to be_valid
+    end
+  end
+
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:name) }
+  end
+
+  describe 'Associations' do
+    it { is_expected.to have_many(:sections) }
+  end
+
+  describe 'Database' do
+    it { is_expected.to have_db_column(:name).of_type(:string) }
+  end
 end
