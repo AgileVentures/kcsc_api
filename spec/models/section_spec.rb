@@ -19,4 +19,8 @@ RSpec.describe Section, type: :model do
     it { is_expected.to have_db_column(:variant).of_type(:integer) }
     it { is_expected.to have_db_column(:view_id).of_type(:integer) }
   end
+
+  describe 'Enums' do
+    it { is_expected.to define_enum_for(:variant).with_values([:services, :about_us, :about_self_care, :information]) }
+  end
 end
