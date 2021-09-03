@@ -13,7 +13,12 @@ class SectionsController < ApplicationController
     render json: section, serializer: Section::ShowSerializer
   end
 
+  def create
+    section = Section.create section_params
+    render json: section, serializer: Section::ShowSerializer, status: :created
+  end
+
   def section_params
-    params.require(:section).permit(:name, :view_id, :header)
+    params.require(:section).permit(:view_id, :header, :description)
   end
 end

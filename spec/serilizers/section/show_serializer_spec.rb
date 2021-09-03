@@ -13,7 +13,7 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
   end
 
   it 'is expected to contain relevant keys for each object' do
-    expected_keys = %w[variant header description]
+    expected_keys = %w[variant header description view_id]
     expect(subject['sections'].last.keys).to match expected_keys
   end
 end
