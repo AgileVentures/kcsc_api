@@ -1,7 +1,6 @@
 RSpec.describe 'GET /api/articles', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
-  let!(:image) { create(:associated_image) }
-  let!(:articles) { 5.times { create(:article, image: image) } }
+  let!(:image) { create_list(:associated_image, 5) }
 
   subject { response }
 

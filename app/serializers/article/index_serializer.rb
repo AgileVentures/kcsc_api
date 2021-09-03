@@ -11,6 +11,7 @@ class Article::IndexSerializer < ActiveModel::Serializer
   end
 
   def image
+    return unless object.image
     url = if Rails.env.test?
             object.image.file
           else
