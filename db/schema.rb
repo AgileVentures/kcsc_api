@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(version: 2021_08_31_140048) do
     t.index ["article_id"], name: "index_images_on_article_id"
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.text "header"
+    t.string "variant"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "services", force: :cascade do |t|
     t.datetime "imported_at"
     t.float "latitude"
