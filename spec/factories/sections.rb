@@ -3,6 +3,6 @@ FactoryBot.define do
     view 
     header { "MyString" }
     description { "MyText" }
-    variant { 1 }
+    variant { :regular }
   end
 end

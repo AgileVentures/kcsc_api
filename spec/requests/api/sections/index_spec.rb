@@ -1,7 +1,7 @@
 RSpec.describe 'GET /sections?view=:view_name', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let!(:about_view) { create(:view, name: 'about') }
-  let!(:sections) { create_list(:section, 3, view: about_view, variant: :about_us) }
+  let!(:sections) { create_list(:section, 3, view: about_view, variant: :regular) }
   subject { response }
 
   

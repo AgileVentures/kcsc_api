@@ -11,6 +11,7 @@ RSpec.describe Section, type: :model do
 
   describe 'Associations' do
     it { is_expected.to belong_to(:view) }
+    it { is_expected.to have_one(:image).dependent(:destroy).conditions(variant: %w[regular carousel slider]) }
   end
 
   describe 'Database' do
@@ -21,6 +22,6 @@ RSpec.describe Section, type: :model do
   end
 
   describe 'Enums' do
-    it { is_expected.to define_enum_for(:variant).with_values([:services, :about_us, :about_self_care, :information]) }
+    it { is_expected.to define_enum_for(:variant).with_values(%i[regular no_image carousel slider ]) }
   end
 end

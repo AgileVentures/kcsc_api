@@ -1,6 +1,6 @@
 class Section < ApplicationRecord
-  enum variant: { services: 0, about_us: 1, about_self_care: 2, information: 3 }
+  enum variant: { regular: 0, no_image: 1, carousel: 2, slider: 3 }
   belongs_to :view
   validates_presence_of :header
-  has_one :image, dependent: :destroy
+  has_one :image, -> { where variant: %w[regular carousel slider] }, dependent: :destroy
 end
