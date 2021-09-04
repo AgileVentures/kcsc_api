@@ -15,7 +15,8 @@ RSpec.describe Image, type: :model do
   end
 
   describe 'Relationships' do
-    it { is_expected.to belong_to(:article) }
+    it { is_expected.to belong_to(:article).optional }
+    it { is_expected.to belong_to(:section).optional }
     it { is_expected.to have_one_attached(:file) }
   end
 

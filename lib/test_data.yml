@@ -1,11 +1,11 @@
 ---
 :app_data:
-  :about: We are all about doing good
-  :testimonials:
+  :string_value: Just a string
+  :array_of_objects:
   - :id: 1
-    :foo: bar
+    :name: One
   - :id: 2
-    :foo: baz
-  :disclaimers:
-    :one: value
-    :two: another value
+    :name: Two
+  :object:
+    :key: value
+    :another_key: another value

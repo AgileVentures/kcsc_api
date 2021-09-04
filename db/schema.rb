@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_110924) do
+ActiveRecord::Schema.define(version: 2021_09_04_052906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,10 +97,12 @@ ActiveRecord::Schema.define(version: 2021_09_03_110924) do
 
   create_table "images", force: :cascade do |t|
     t.string "alt_text"
-    t.bigint "article_id", null: false
+    t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "section_id"
     t.index ["article_id"], name: "index_images_on_article_id"
+    t.index ["section_id"], name: "index_images_on_section_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -171,5 +173,6 @@ ActiveRecord::Schema.define(version: 2021_09_03_110924) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "images", "articles"
+  add_foreign_key "images", "sections"
   add_foreign_key "sections", "views"
 end
