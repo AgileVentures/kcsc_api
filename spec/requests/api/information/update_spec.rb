@@ -17,7 +17,7 @@ RSpec.describe 'PUT /api/information/:id' do
   
       it { is_expected.to have_http_status 200 }
   
-      it 'is expected to update the information item title' do
+      it 'is expected to update the information item header' do
         expect(information_item.reload.header).to eq 'New Header'
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe 'PUT /api/information/:id' do
       it { is_expected.to have_http_status 200 }
   
       it 'is expected to publish the information item' do
-        expect(article.reload.published).to eq true
+        expect(information_item.reload.publish).to eq true
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe 'PUT /api/information/:id' do
       before do
         put "/api/information/#{information_item.id}",
              params: { information_item:
-              { header: 'Test Article', description: 'This is a test article' } },
+              { header: 'Test Info Item', description: 'This is a test info item' } },
              headers: invalid_auth_headers
       end
 
