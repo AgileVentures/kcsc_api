@@ -1,5 +1,6 @@
 RSpec.describe 'GET /api/information', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
+  let!(:information_items) { 3.times { create(:information_item) } }
 
   subject { response }
 
@@ -21,6 +22,6 @@ RSpec.describe 'GET /api/information', type: :request do
     end
 
     it { is_expected.to have_http_status 401 }
-    
+
   end
 end

@@ -1,5 +1,6 @@
 class InformationController < ApplicationController
   def index
-    binding.pry
+    information_items = InformationItem.all
+    render json: { information_items: information_items }
   end
 end
