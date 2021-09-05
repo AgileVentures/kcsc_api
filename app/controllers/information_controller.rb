@@ -1,4 +1,6 @@
 class InformationController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
     information_items = InformationItem.all
     render json: { information_items: information_items }

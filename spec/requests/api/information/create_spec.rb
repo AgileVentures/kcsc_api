@@ -17,23 +17,23 @@ RSpec.describe 'POST /api/information' do
     it { is_expected.to have_http_status(:created) }
 
     it 'is expected to return the information item header' do
-      expect(response_json['information_items'][0]['header']).to eq 'Test Info'
+      expect(response_json['information_item']['header']).to eq 'Test Info'
     end
 
     it 'is expected to return the information item description' do
-      expect(response_json['information_items'][0]['description']).to eq 'This is a test information item' 
+      expect(response_json['information_item']['description']).to eq 'This is a test information item' 
     end
 
     it 'is expected to return the information item link' do
-      expect(response_json['information_items'][0]['link']).to eq 'http://test.com' 
+      expect(response_json['information_item']['link']).to eq 'http://test.com' 
     end
 
     it 'is expected to set pinned to false' do
-      expect(response_json['information_items'][0]['pinned']).to eq false
+      expect(response_json['information_item']['pinned']).to eq false
     end
 
     it 'is expected to set publish to false' do
-      expect(response_json['information_items'][0]['publish']).to eq false
+      expect(response_json['information_item']['publish']).to eq true
     end
   end
 
@@ -44,8 +44,8 @@ RSpec.describe 'POST /api/information' do
       before do
         post '/api/information',
              params: { information_item:
-              { header: 'Test Info', body: 'This is a test information item', link: 'http://test.com', pinned: false, publish: false} },
-             headers: invalid_auth_headers_for_user
+              { header: 'Test Info', description: 'This is a test information item', link: 'http://test.com', pinned: false, publish: true} },
+             headers: invalid_auth_headers
       end
 
       it { is_expected.to have_http_status(:unauthorized) }
@@ -59,14 +59,14 @@ RSpec.describe 'POST /api/information' do
       before do
         post '/api/information',
              params: { information_item:
-              { header: '', body: '', link: '', pinned: null, publish: null} },
+              { header: '', description: '', link: '', pinned: false, publish: true} },
              headers: valid_auth_headers_for_user
       end
 
       it { is_expected.to have_http_status(:unprocessable_entity) }
 
       it 'is expected to return error message' do
-        expect(response_json['message']).to eq "Attributes can't be blank"
+        expect(response_json['message']).to eq "Header can't be blank, Description can't be blank, and Link can't be blank"
       end
     end
   end
