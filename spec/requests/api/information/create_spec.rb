@@ -10,7 +10,7 @@ RSpec.describe 'POST /api/information' do
     before do
       post '/api/information',
            params: { information_item:
-            { header: 'Test Info', body: 'This is a test information item', link: 'http://test.com', pinned: false, publish: false} },
+            { header: 'Test Info', description: 'This is a test information item', link: 'http://test.com', pinned: false, publish: true} },
            headers: valid_auth_headers_for_user
     end
 

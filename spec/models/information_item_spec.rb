@@ -9,8 +9,8 @@ RSpec.describe InformationItem, type: :model do
     it { is_expected.to validate_presence_of(:header) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:link) }
-    it { is_expected.to validate_presence_of(:pinned) }
-    it { is_expected.to validate_presence_of(:publish) }
+    it { is_expected.to validate_inclusion_of(:pinned).in_array([false, true]) }
+    it { is_expected.to validate_inclusion_of(:publish).in_array([false, true]) }
   end
 
   describe 'Database' do
