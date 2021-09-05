@@ -10,7 +10,7 @@ RSpec.describe View, type: :model do
   end
 
   describe 'Associations' do
-    it { is_expected.to have_many(:sections) }
+    it { is_expected.to have_many(:sections).dependent(:destroy) }
   end
 
   describe 'Database' do
