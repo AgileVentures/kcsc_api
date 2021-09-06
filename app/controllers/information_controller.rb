@@ -4,6 +4,7 @@ class InformationController < ApplicationController
   def index
     information_items = InformationItem.all
     information_items = information_items.select { |item| item.publish == true } unless current_user
+    information_items = information_items.sort_by { |item| item[:id] }
     render json: { information_items: information_items }
   end
 
