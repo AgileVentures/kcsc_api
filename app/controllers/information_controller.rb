@@ -1,8 +1,9 @@
 class InformationController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update]
+  before_action :authenticate_user!, only: %i[create update]
 
   def index
     information_items = InformationItem.all
+    information_items = information_items.select { |item| item.publish == true } unless current_user
     render json: { information_items: information_items }
   end
 
