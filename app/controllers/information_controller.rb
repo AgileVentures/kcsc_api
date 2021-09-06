@@ -18,11 +18,17 @@ class InformationController < ApplicationController
 
   def update
     information_item = InformationItem.find(params[:id])
-    if information_item.update(information_item_params)
-      render json: information_item, serializer: InformationItem::ShowSerializer
+    if params.has_key?('header')
+      information_item.update(information_item_params)
+    elsif params.has_key?('pinned')
+      information_item.update(pinned: params[:pinned])
+    elsif params.has_key?('publish')
+      information_item.update(publish: params[:publish])
     else
       render_error(information_item)
     end
+    information_item.reload
+    render json: information_item, serializer: InformationItem::ShowSerializer
   end
 
   private
