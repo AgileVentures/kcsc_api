@@ -60,7 +60,6 @@ module ServicesImportService
     model.latitude = address['address']['Latitude']
     model.longitude = address['address']['Longitude']
     model.save!
-    binding.pry
   end
 
   def self.full_address(address)
