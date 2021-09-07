@@ -1,11 +1,10 @@
 RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
-  let!(:service_1) { create(:service, name: 'Boy Scouts') }
-  let!(:service_2) { create(:service, description: 'We help boys come to terms with their masculinity') }
-  let!(:service_3) { create(:service, email: 'boys-will-be-boys@mail.com') }
+  let!(:service_1) { create(:service, name: 'Boy Scouts', category: 'sports', category_secondary: 'chess') }
+  let!(:service_2) { create(:service, description: 'We help boys come to terms with their masculinity', category: 'dancing') }
+  let!(:service_3) { create(:service, email: 'boys-will-be-boys@mail.com', category: 'chess') }
   let!(:service_4) { create(:service, email: 'girls-will-be-girls@mail.com') }
   let!(:service_5) { create(:service, description: 'We help girls come to terms with their femininity') }
-  let!(:service_6) { create(:service, name: 'Boy Scouts', category: 'chess') }
 
   before do
     ServicesIndex.reset!
@@ -45,7 +44,26 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
       end
 
       it 'is expected to return 3 services' do
-        expect(response_json['services'].count).to eq 1
+        expect(response_json['services'].count).to eq 2
+      end
+    end
+
+    describe 'returns in any category' do
+      before do
+        post '/api/search',
+             params: {
+               q: 'Boy',
+               category: 'All'
+             },
+             headers: { API_KEY: api_key }
+      end
+
+      it 'is expected to return return a 200 response' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to return 3 services' do
+        expect(response_json['services'].count).to eq 3
       end
     end
   end
