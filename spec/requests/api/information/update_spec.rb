@@ -66,7 +66,7 @@ RSpec.describe 'PUT /api/information/:id' do
       it { is_expected.to have_http_status(:unprocessable_entity) }
 
       it 'is expected to return error message' do
-        expect(response_json['message']).to eq "Header can't be blank and Description can't be blank"
+        expect(response_json['message']).to eq "Header can't be blank"
       end
     end
   end

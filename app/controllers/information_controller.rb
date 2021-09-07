@@ -19,15 +19,17 @@ class InformationController < ApplicationController
 
   def update
     information_item = InformationItem.find(params[:id])
+
     params['information_item'].each do |key, value|
-        information_item.update(Hash[key, value])
-        binding.pry
+      @updated = information_item.update(Hash[key, value]) if information_item.attributes.key?(key)
+      break if @updated == false
     end
-    #information_item.reload    
+
+    if @updated
       render json: information_item, serializer: InformationItem::ShowSerializer
-
+    else
       render_error(information_item)
-
+    end
   end
 
   private
