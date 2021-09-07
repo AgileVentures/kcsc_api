@@ -1,5 +1,5 @@
 class InformationController < ApplicationController
-  before_action :authenticate_user!, only: %i[create update]
+  before_action :authenticate_user!, only: %i[create update show]
 
   def index
     information_items = InformationItem.all
@@ -7,6 +7,12 @@ class InformationController < ApplicationController
     information_items = information_items.sort_by { |item| item[:id] }
     render json: { information_items: information_items }
   end
+
+  def show
+    information_item = InformationItem.find(params[:id])
+    render json: information_item, serializer: InformationItem::ShowSerializer, status: 200
+  end
+  
 
   def create
     information_item = InformationItem.create(information_item_params)
