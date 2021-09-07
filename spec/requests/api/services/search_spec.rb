@@ -5,26 +5,48 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
   let!(:service_3) { create(:service, email: 'boys-will-be-boys@mail.com') }
   let!(:service_4) { create(:service, email: 'girls-will-be-girls@mail.com') }
   let!(:service_5) { create(:service, description: 'We help girls come to terms with their femininity') }
+  let!(:service_6) { create(:service, name: 'Boy Scouts', category: 'chess') }
 
   before do
     ServicesIndex.reset!
     wait_for_index(ServicesIndex)
   end
   describe 'with a valid api key' do
-    before do
-      post '/api/search',
-           params: {
-             q: 'Boy'
-           },
-           headers: { API_KEY: api_key }
+    describe 'any category' do
+      before do
+        post '/api/search',
+             params: {
+               q: 'Boy'
+             },
+             headers: { API_KEY: api_key }
+      end
+
+      it 'is expected to return return a 200 response' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to return 3 services' do
+        expect(response_json['services'].count).to eq 3
+      end
     end
 
-    it 'is expected to return return a 200 response' do
-      expect(response).to have_http_status 200
-    end
+    describe 'filter by category' do
+      before do
+        post '/api/search',
+             params: {
+               q: 'Boy',
+               category: 'chess'
+             },
+             headers: { API_KEY: api_key }
+      end
 
-    it 'is expected to return 3 services' do
-      expect(response_json['services'].count).to eq 3
+      it 'is expected to return return a 200 response' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to return 3 services' do
+        expect(response_json['services'].count).to eq 1
+      end
     end
   end
 
@@ -56,6 +78,25 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
     end
 
     it 'is expected to return a 404 response' do
+      expect(response).to have_http_status 404
+    end
+
+    it 'is expected to return a error message' do
+      expect(response_json['message']).to eq 'Your search yielded no results'
+    end
+  end
+
+  describe 'bad category' do
+    before do
+      post '/api/search',
+           params: {
+             q: 'Boy',
+             category: 'Joj'
+           },
+           headers: { API_KEY: api_key }
+    end
+
+    it 'is expected to return return a 200 response' do
       expect(response).to have_http_status 404
     end
 
