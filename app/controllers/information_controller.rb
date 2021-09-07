@@ -19,17 +19,17 @@ class InformationController < ApplicationController
 
   def update
     information_item = InformationItem.find(params[:id])
-    if params.has_key?('header')
-      information_item.update(information_item_params)
-    elsif params.has_key?('pinned')
-      information_item.update(pinned: params[:pinned])
-    elsif params.has_key?('publish')
-      information_item.update(publish: params[:publish])
+
+    params['information_item'].each do |key, value|
+      @updated = information_item.update(Hash[key, value]) if information_item.attributes.key?(key)
+      break if @updated == false
+    end
+
+    if @updated
+      render json: information_item, serializer: InformationItem::ShowSerializer
     else
       render_error(information_item)
     end
-    information_item.reload
-    render json: information_item, serializer: InformationItem::ShowSerializer
   end
 
   private

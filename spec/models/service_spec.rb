@@ -14,6 +14,14 @@ RSpec.describe Service, type: :model do
         .of_type(:text)
     }
     it {
+      is_expected.to have_db_column(:category)
+        .of_type(:string)
+    }
+    it {
+      is_expected.to have_db_column(:category_secondary)
+        .of_type(:string)
+    }
+    it {
       is_expected.to have_db_column(:latitude)
         .of_type(:float)
     }

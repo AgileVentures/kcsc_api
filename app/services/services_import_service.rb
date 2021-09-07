@@ -48,6 +48,8 @@ module ServicesImportService
     model.imported_from = API_URL
     model.name = contact['organisation']['Delivered by-Organization Name'].titleize
     model.description = description(contact)
+    model.category = contact['organisation']['Self care service category']
+    model.category_secondary = contact['organisation']['Self Care Category Secondary']
     model.telephone = contact['organisation']['OfficeMain-Phone-General Phone']
     model.email = contact['organisation']['OfficeMain-Email']
     model.website = contact['organisation']['Website']
