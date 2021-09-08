@@ -46,7 +46,7 @@ module ServicesImportService
   def self.save_model_attributes(model, contact, address)
     model.imported_at = Time.current
     model.imported_from = API_URL
-    model.name = contact['organisation']['Delivered by-Organization Name'].titleize
+    model.name = contact['organisation']['Delivered by-Organization Name']
     model.description = description(contact)
     model.category = contact['organisation']['Self care service category']
     model.category_secondary = contact['organisation']['Self Care Category Secondary']
