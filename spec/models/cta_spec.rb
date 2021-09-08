@@ -12,6 +12,6 @@ RSpec.describe Cta, type: :model do
   end
 
   describe 'Relationships' do
-    it { is_expected.to belong_to(:section) }
+    it { is_expected.to belong_to(:section).validate(false) }
   end
 end

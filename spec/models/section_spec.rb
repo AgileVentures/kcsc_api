@@ -49,15 +49,16 @@ RSpec.describe Section, type: :model do
     it { is_expected.to belong_to(:view) }
     it {
       is_expected.to have_one(:image)
-        .dependent(:destroy)
-        .conditions(variant: %w[regular carousel slider])
+        .dependent(:destroy_async)
     }
-    it {
-      is_expected.to have_many(:buttons)
-        .dependent(:destroy)
-        .conditions(variant: %w[regular])
-        .class_name('Cta')
-    }
+    context 'regular' do
+      subject { create(:slider) }
+      it {
+        is_expected.to have_many(:buttons)
+          .dependent(:destroy)
+          .class_name('Cta')
+      }
+    end
   end
 
   describe 'Database' do
