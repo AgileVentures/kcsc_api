@@ -5,6 +5,8 @@ FactoryBot.define do
     longitude { 1.5 }
     name { 'MyString' }
     description { 'MyText' }
+    category { 'MyCategory' }
+    category_secondary { 'MyCategory2' }
     telephone { 'MyString' }
     email { 'user@mail.com' }
     publish_address { false }

@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :articles, only: %i[index show create update]
     resource :app_data, only: %i[show update]
     resources :sections, only: %i[index create update]
+    resources :information, only: %i[index create update show]
   end
 end
