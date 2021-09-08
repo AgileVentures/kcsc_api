@@ -1,7 +1,43 @@
 RSpec.describe Section, type: :model do
-  describe 'Factory' do
-    it 'is expected to have valid basic Factory' do
-      expect(create(:section)).to be_valid
+  describe 'Factories' do
+    context 'basic section' do
+      subject { create(:section) }
+      it { is_expected.to be_valid }
+      it 'is expected to store nil as numeric value for variant' do
+        expect(subject.variant).to eq nil
+      end
+    end
+
+    context 'regular section' do
+      subject { create(:regular) }
+      it { is_expected.to be_valid }
+      it 'is expected to store 0 as numeric value for variant' do
+        expect(subject.variant_before_type_cast).to eq 0
+      end
+    end
+
+    context 'no_image section' do
+      subject { create(:no_image) }
+      it { is_expected.to be_valid }
+      it 'is expected to store 1 as numeric value for variant' do
+        expect(subject.variant_before_type_cast).to eq 1
+      end
+    end
+
+    context 'carousel section' do
+      subject { create(:carousel) }
+      it { is_expected.to be_valid }
+      it 'is expected to store 2 as numeric value for variant' do
+        expect(subject.variant_before_type_cast).to eq 2
+      end
+    end
+
+    context 'slider section' do
+      subject { create(:slider) }
+      it { is_expected.to be_valid }
+      it 'is expected to store 3 as numeric value for variant' do
+        expect(subject.variant_before_type_cast).to eq 3
+      end
     end
   end
 
@@ -34,5 +70,4 @@ RSpec.describe Section, type: :model do
   describe 'Enums' do
     it { is_expected.to define_enum_for(:variant).with_values(%i[regular no_image carousel slider]) }
   end
-
 end
