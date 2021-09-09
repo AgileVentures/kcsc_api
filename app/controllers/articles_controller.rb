@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
 
   def update
     article = Article.find(params[:id])
-    update_image(article) unless params[:article][:image].include? 'http'
+    update_image(article) if params[:article][:image].present?
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
     else
@@ -45,6 +45,6 @@ class ArticlesController < ApplicationController
   end
 
   def update_image(article)
-    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], article.image)
+    DecodeService.attach_image(params[:article][:image], article.image) unless params[:article][:image].include? 'http'
   end
 end
