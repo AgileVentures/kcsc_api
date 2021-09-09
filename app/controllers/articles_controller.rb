@@ -41,10 +41,11 @@ class ArticlesController < ApplicationController
   end
 
   def attach_image(article)
-    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article))
+    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article, alt_text: params[:article][:alt]))
   end
 
   def update_image(article)
     DecodeService.attach_image(params[:article][:image], article.image) unless params[:article][:image].include? 'http'
+    article.image.update(alt_text: params[:article][:alt])
   end
 end

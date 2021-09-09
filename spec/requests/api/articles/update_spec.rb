@@ -44,7 +44,7 @@ RSpec.describe 'PUT /api/articles/:id' do
 
       before do
         put "/api/articles/#{article.id}",
-            params: { article: { image: new_image } },
+            params: { article: { image: new_image, alt: 'new alt' } },
             headers: valid_auth_headers_for_user
       end
 
@@ -56,6 +56,11 @@ RSpec.describe 'PUT /api/articles/:id' do
         new_image_id = Article.find(article.id).image.file.attributes['id']
         old_image_id = article.image.file.attributes['id']
         expect(new_image_id).not_to eq old_image_id
+      end
+
+      it 'is expected to update alt attribute' do
+        new_image_alt_text = Article.find(article.id).image.attributes['alt_text']
+        expect(new_image_alt_text).to eq 'new alt'
       end
     end
   end
