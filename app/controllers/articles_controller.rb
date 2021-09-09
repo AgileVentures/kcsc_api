@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
 
   def update
     article = Article.find(params[:id])
+    attach_image(article) unless params[:article][:image].include? 'http'
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
     else
