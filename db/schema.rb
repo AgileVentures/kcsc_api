@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_094714) do
+ActiveRecord::Schema.define(version: 2021_09_10_082835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.string "organization"
+    t.text "description"
+    t.boolean "published"
+    t.string "web"
+    t.string "facebook"
+    t.string "twitter"
+    t.bigint "section_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_cards_on_section_id"
+  end
+
   create_table "cta", force: :cascade do |t|
     t.string "text"
     t.string "link"
@@ -106,11 +119,13 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
 
   create_table "images", force: :cascade do |t|
     t.string "alt_text"
-    t.bigint "article_id", null: false
+    t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "section_id"
+    t.bigint "card_id", null: false
     t.index ["article_id"], name: "index_images_on_article_id"
+    t.index ["card_id"], name: "index_images_on_card_id"
     t.index ["section_id"], name: "index_images_on_section_id"
   end
 
@@ -194,8 +209,10 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
+  add_foreign_key "cards", "sections"
   add_foreign_key "cta", "sections"
   add_foreign_key "images", "articles"
+  add_foreign_key "images", "cards"
   add_foreign_key "images", "sections"
   add_foreign_key "sections", "views"
 end

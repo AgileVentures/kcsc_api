@@ -51,6 +51,13 @@ RSpec.describe Section, type: :model do
           .class_name('Cta')
       }
     end
+    context 'carousel' do
+      subject { create(:carousel) }
+      it {
+        is_expected.to have_many(:cards)
+          .dependent(:destroy)
+      }
+    end
   end
 
   describe 'Database' do
