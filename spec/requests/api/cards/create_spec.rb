@@ -13,6 +13,7 @@ RSpec.describe 'POST /cards', type: :request do
   describe 'with valid api key' do
     before do
       post '/api/cards', params: { card: { organization: 'new organization',
+                                           description: 'whatever',
                                            section_id: section.id,
                                            published: true,
                                            logo: image,
