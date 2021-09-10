@@ -1,5 +1,5 @@
 RSpec.describe Article, type: :model do
-  let(:image) { build(:image) }
+  let(:image) { build(:associated_image) }
   describe 'Factory' do
     it 'is expected to have valid basic Factory' do
       expect(create(:article, image: image)).to be_valid

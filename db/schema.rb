@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_082835) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "section_id"
-    t.bigint "card_id", null: false
+    t.bigint "card_id"
     t.index ["article_id"], name: "index_images_on_article_id"
     t.index ["card_id"], name: "index_images_on_card_id"
     t.index ["section_id"], name: "index_images_on_section_id"
