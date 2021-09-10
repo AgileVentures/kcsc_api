@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 
   def create
     ServicesIndex.import
-    query = if !params.key?('category') || params['category'] == 'All'
+    query = if !params.key?('category') || params['category'] == 'All' || params['category'] == ''
               search(params['q'])
             else
               advanced_search(params['q'], params['category'])
@@ -27,23 +27,36 @@ class SearchController < ApplicationController
   end
 
   def advanced_search(query, category)
-    ServicesIndex.filter(multi_match: { query: category,
-                                        fields: %i[category category_secondary] }).query(multi_match: {
-                                                                                           query: query,
-                                                                                           fields: %i[
-                                                                                             name description email website telephone
-                                                                                           ],
-                                                                                           fuzziness: 'AUTO'
-                                                                                         })
+    if params['q'] == ''
+      all_in_category(category)
+    else
+      ServicesIndex.filter(multi_match: { query: category,
+                                          fields: %i[category category_secondary] }).query(multi_match: {
+                                                                                             query: query,
+                                                                                             fields: %i[
+                                                                                               name description email website telephone
+                                                                                             ],
+                                                                                             fuzziness: 'AUTO'
+                                                                                           })
+    end
   end
 
   def search(query)
-    ServicesIndex.query(multi_match: {
-                          query: query,
-                          fields: %i[
-                            name description email website telephone
-                          ],
-                          fuzziness: 'AUTO'
-                        })
+    if params['q'] == ''
+      ServicesIndex.all
+    else
+      ServicesIndex.query(multi_match: {
+                            query: query,
+                            fields: %i[
+                              name description email website telephone
+                            ],
+                            fuzziness: 'AUTO'
+                          })
+    end
+  end
+
+  def all_in_category(category)
+    ServicesIndex.all.filter(multi_match: { query: category,
+                                            fields: %i[category category_secondary] })
   end
 end

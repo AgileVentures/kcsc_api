@@ -4,7 +4,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
   let!(:service_2) { create(:service, description: 'We help boys come to terms with their masculinity', category: 'dancing') }
   let!(:service_3) { create(:service, email: 'boys-will-be-boys@mail.com', category: 'chess') }
   let!(:service_4) { create(:service, email: 'girls-will-be-girls@mail.com') }
-  let!(:service_5) { create(:service, description: 'We help girls come to terms with their femininity') }
+  let!(:service_5) { create(:service, description: 'We help girls come to terms with their femininity', category: 'chess') }
 
   before do
     ServicesIndex.reset!
@@ -20,7 +20,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
              headers: { API_KEY: api_key }
       end
 
-      it 'is expected to return return a 200 response' do
+      it 'is expected to return a 200 response' do
         expect(response).to have_http_status 200
       end
 
@@ -39,12 +39,50 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
              headers: { API_KEY: api_key }
       end
 
-      it 'is expected to return return a 200 response' do
+      it 'is expected to return a 200 response' do
         expect(response).to have_http_status 200
       end
 
       it 'is expected to return 3 services' do
         expect(response_json['services'].count).to eq 2
+      end
+    end
+
+    describe 'with an emtpy query' do
+      before do
+        post '/api/search',
+             params: {
+               q: '',
+               category: 'chess'
+             },
+             headers: { API_KEY: api_key }
+      end
+
+      it 'is expected to return a 200 response' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to return 3 services' do
+        expect(response_json['services'].count).to eq 3
+      end
+    end
+
+    describe 'with both query' do
+      before do
+        post '/api/search',
+             params: {
+               q: '',
+               category: ''
+             },
+             headers: { API_KEY: api_key }
+      end
+
+      it 'is expected to return a 200 response' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to return 5 services' do
+        expect(response_json['services'].count).to eq 5
       end
     end
 
@@ -58,7 +96,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
              headers: { API_KEY: api_key }
       end
 
-      it 'is expected to return return a 200 response' do
+      it 'is expected to return a 200 response' do
         expect(response).to have_http_status 200
       end
 
@@ -77,7 +115,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
            headers: { API_KEY: 'whatever' }
     end
 
-    it 'is expected to return return a 401 response' do
+    it 'is expected to return a 401 response' do
       expect(response).to have_http_status 401
     end
 
@@ -114,7 +152,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
            headers: { API_KEY: api_key }
     end
 
-    it 'is expected to return return a 200 response' do
+    it 'is expected to return a 200 response' do
       expect(response).to have_http_status 404
     end
 
