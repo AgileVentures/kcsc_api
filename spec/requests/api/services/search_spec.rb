@@ -39,7 +39,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
              headers: { API_KEY: api_key }
       end
 
-      it 'is expected to return return a 200 response' do
+      it 'is expected to return a 200 response' do
         expect(response).to have_http_status 200
       end
 
@@ -81,7 +81,7 @@ RSpec.describe 'POST /api/search/:q', type: %i[request search_request] do
         expect(response).to have_http_status 200
       end
 
-      it 'is expected to return 3 services' do
+      it 'is expected to return 5 services' do
         expect(response_json['services'].count).to eq 5
       end
     end
