@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: %i[create update ]
+  before_action :authenticate_user!, only: %i[create update]
 
   def index
     articles = Article.all
+    articles = articles.select { |article| article.published == true } unless current_user
+    articles = articles.sort_by { |article| article[:id] }
     render json: articles, each_serializer: Article::IndexSerializer
   end
 
@@ -22,6 +24,7 @@ class ArticlesController < ApplicationController
 
   def update
     article = Article.find(params[:id])
+    update_image(article) if params[:article][:image].present?
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
     else
@@ -40,6 +43,11 @@ class ArticlesController < ApplicationController
   end
 
   def attach_image(article)
-    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article))
+    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article, alt_text: params[:article][:alt]))
+  end
+
+  def update_image(article)
+    DecodeService.attach_image(params[:article][:image], article.image) unless params[:article][:image].include? 'http'
+    article.image.update(alt_text: params[:article][:alt])
   end
 end

@@ -13,7 +13,7 @@ RSpec.describe 'POST /api/articles' do
     before do
       post '/api/articles',
            params: { article:
-            { title: 'Test Article', body: 'This is a test article', image: image } },
+            { title: 'Test Article', body: 'This is a test article', image: image, alt: 'alt' } },
            headers: valid_auth_headers_for_user
     end
 
@@ -33,6 +33,10 @@ RSpec.describe 'POST /api/articles' do
 
     it 'is expected to set published to true' do
       expect(response_json['article']['published']).to eq true
+    end
+
+    it 'is expected to set alt attribute of image' do
+      expect(response_json['article']['image']['alt']).to eq 'alt'
     end
   end
 

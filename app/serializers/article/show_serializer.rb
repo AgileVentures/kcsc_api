@@ -1,5 +1,5 @@
 class Article::ShowSerializer < ActiveModel::Serializer
-  attributes :id, :id, :title, :body, :date, :image, :published
+  attributes :id, :title, :body, :date, :image, :published
   belongs_to :author, serializer: Users::Serializer
 
   def date
