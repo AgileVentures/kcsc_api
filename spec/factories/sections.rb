@@ -16,6 +16,3 @@ FactoryBot.define do
     end
   end
 end
-
-
-# regular: 0, no_image: 1, carousel: 2

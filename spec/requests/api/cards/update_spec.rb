@@ -1,4 +1,4 @@
-RSpec.describe 'PUT /api/articles/:id' do
+RSpec.describe 'PUT /api/cards/:id' do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }

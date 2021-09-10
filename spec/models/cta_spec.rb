@@ -6,7 +6,7 @@ RSpec.describe Cta, type: :model do
   end
   describe 'db table' do
     it { is_expected.to have_db_column(:text).of_type(:string) }
-    it { is_expected.to have_db_column(:link).of_type(:string) }
+    it { is_expected.to have_db_column(:link).of_type(:text) }
     it { is_expected.to have_db_column(:section_id).of_type(:integer) }
   end
 end
