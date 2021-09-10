@@ -57,7 +57,7 @@ RSpec.describe 'POST /cards', type: :request do
                                              published: true,
                                              logo: image,
                                              alt: 'alt attribute' } },
-                           headers: valid_auth_headers_for_user
+                           headers: invalid_auth_headers
       end
 
       it { is_expected.to have_http_status(:unauthorized) }

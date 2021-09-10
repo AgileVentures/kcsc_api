@@ -22,6 +22,7 @@ class CardsController < ApplicationController
   end
 
   def attach_image(card)
-    params[:card][:logo].present? && DecodeService.attach_image(params[:card][:logo], Image.create(card: card, alt_text: params[:card][:alt]))
+    params[:card][:logo].present? && DecodeService.attach_image(params[:card][:logo],
+                                                                Image.create(card: card, alt_text: params[:card][:alt]))
   end
 end
