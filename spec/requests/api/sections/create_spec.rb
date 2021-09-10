@@ -1,6 +1,10 @@
 RSpec.describe 'POST /sections/', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let!(:about_view) { create(:view, name: 'about') }
+  let(:user) { create(:user) }
+  let(:credentials) { user.create_new_auth_token }
+  let(:valid_auth_headers_for_user) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key }.merge!(credentials) }
+  
   subject { response }
 
   describe 'with valid api key' do
@@ -8,7 +12,7 @@ RSpec.describe 'POST /sections/', type: :request do
       post '/api/sections', params: { section: { header: 'new header',
                                                  view_id: about_view.id,
                                                  description: 'whatever we need to use as a description' } },
-                            headers: { API_KEY: api_key }
+                                                 headers: valid_auth_headers_for_user
     end
 
     it { is_expected.to have_http_status 201 }
