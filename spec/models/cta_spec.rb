@@ -10,8 +10,4 @@ RSpec.describe Cta, type: :model do
     it { is_expected.to have_db_column(:link).of_type(:string) }
     it { is_expected.to have_db_column(:section_id).of_type(:integer) }
   end
-
-  describe 'Relationships' do
-    it { is_expected.to belong_to(:section).validate(false) }
-  end
 end

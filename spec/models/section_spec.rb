@@ -31,14 +31,6 @@ RSpec.describe Section, type: :model do
         expect(subject.variant_before_type_cast).to eq 2
       end
     end
-
-    context 'slider section' do
-      subject { create(:slider) }
-      it { is_expected.to be_valid }
-      it 'is expected to store 3 as numeric value for variant' do
-        expect(subject.variant_before_type_cast).to eq 3
-      end
-    end
   end
 
   describe 'Validations' do
@@ -52,7 +44,7 @@ RSpec.describe Section, type: :model do
         .dependent(:destroy_async)
     }
     context 'regular' do
-      subject { create(:slider) }
+      subject { create(:regular) }
       it {
         is_expected.to have_many(:buttons)
           .dependent(:destroy)
@@ -69,6 +61,6 @@ RSpec.describe Section, type: :model do
   end
 
   describe 'Enums' do
-    it { is_expected.to define_enum_for(:variant).with_values(%i[regular no_image carousel slider]) }
+    it { is_expected.to define_enum_for(:variant).with_values(%i[regular no_image carousel]) }
   end
 end

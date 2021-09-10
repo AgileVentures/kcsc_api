@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
 
   create_table "images", force: :cascade do |t|
     t.string "alt_text"
-    t.bigint "article_id"
+    t.bigint "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "section_id"
