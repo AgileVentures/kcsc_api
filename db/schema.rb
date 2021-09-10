@@ -95,23 +95,12 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
-  create_table "cta", force: :cascade do |t|
-    t.string "text"
-    t.string "link"
-    t.bigint "section_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["section_id"], name: "index_cta_on_section_id"
-  end
-
   create_table "images", force: :cascade do |t|
     t.string "alt_text"
-    t.bigint "article_id"
+    t.bigint "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "section_id"
     t.index ["article_id"], name: "index_images_on_article_id"
-    t.index ["section_id"], name: "index_images_on_section_id"
   end
 
   create_table "information_items", force: :cascade do |t|
@@ -188,14 +177,11 @@ ActiveRecord::Schema.define(version: 2021_09_07_094714) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "variant"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
-  add_foreign_key "cta", "sections"
   add_foreign_key "images", "articles"
-  add_foreign_key "images", "sections"
   add_foreign_key "sections", "views"
 end

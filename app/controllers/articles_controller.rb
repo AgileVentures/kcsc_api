@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: %i[create update ]
+  before_action :authenticate_user!, only: %i[create update]
 
   def index
     articles = Article.all
+    articles = articles.select { |article| article.published == true } unless current_user
+    articles = articles.sort_by { |article| article[:id] }
     render json: articles, each_serializer: Article::IndexSerializer
   end
 
