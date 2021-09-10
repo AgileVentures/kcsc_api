@@ -32,9 +32,9 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
   end
 
   context ':carousel' do
-    let(:sections) { create_list(:carousel, 2) }
+    let(:sections) { create_list(:carousel, 2, cards: [create(:card)]) }
     it 'is expected to contain relevant keys for each object' do
-      expected_keys = %w[variant header cards view_id]
+      expected_keys = %w[variant header view_id cards]
       expect(subject['sections'].last.keys).to match expected_keys
     end
   end
