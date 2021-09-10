@@ -45,4 +45,44 @@ RSpec.describe 'POST /cards', type: :request do
       end
     end
   end
+
+  describe 'unsuccessfully' do
+    describe 'with invalid auth headers' do
+      let(:invalid_auth_headers) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key } }
+
+      before do
+        post '/api/cards', params: { card: { organization: 'new organization',
+                                             description: 'whatever',
+                                             section_id: section.id,
+                                             published: true,
+                                             logo: image,
+                                             alt: 'alt attribute' } },
+                           headers: valid_auth_headers_for_user
+      end
+
+      it { is_expected.to have_http_status(:unauthorized) }
+
+      it 'is expected to return error message' do
+        expect(response_json['errors'].first).to eq 'You need to sign in or sign up before continuing.'
+      end
+    end
+
+    describe 'without passing validation' do
+      before do
+        post '/api/cards', params: { card: { organization: '',
+                                             description: 'whatever',
+                                             section_id: section.id,
+                                             published: true,
+                                             logo: image,
+                                             alt: 'alt attribute' } },
+                           headers: valid_auth_headers_for_user
+      end
+
+      it { is_expected.to have_http_status(:unprocessable_entity) }
+
+      it 'is expected to return error message' do
+        expect(response_json['message']).to eq "Organization can't be blank"
+      end
+    end
+  end
 end
