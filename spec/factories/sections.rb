@@ -3,6 +3,16 @@ FactoryBot.define do
     view 
     header { "MyString" }
     description { "MyText" }
-    variant { 1 }
+    factory :regular do
+      variant { :regular }
+    end
+
+    factory :no_image do
+      variant { :no_image }
+    end
+
+    factory :carousel do
+      variant { :carousel }
+    end
   end
 end
