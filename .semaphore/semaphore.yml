@@ -21,7 +21,7 @@ blocks:
             - sem-service start postgres 11
             - sem-version ruby 3.0.0
             - sem-service start elasticsearch
-            - 'wget https://raw.githubusercontent.com/craftacademy/semaphore-scripts/master/es-setup.sh  && bash es-setup.sh 7.10.2'
+            - 'wget https://raw.githubusercontent.com/craftacademy/semaphore-scripts/master/es-setup.sh  && bash es-setup.sh 7.14.2'
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
