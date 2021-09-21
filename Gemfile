@@ -22,7 +22,8 @@ gem 'geocoder'
 gem 'aws-sdk-s3'
 
 group :development, :test do
-  gem 'coveralls', require: false
+  # gem 'coveralls', require: false
+  gem 'simplecov', require: false
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rspec-rails'

@@ -1,7 +1,9 @@
-require 'coveralls'
-Coveralls.wear_merged!('rails')
+# require 'coveralls'
+# Coveralls.wear_merged!('rails')
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'webmock/rspec'
