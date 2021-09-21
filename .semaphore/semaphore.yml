@@ -12,18 +12,31 @@ blocks:
           value: 'postgresql://postgres:@0.0.0.0:5432/myapp_test'
         - name: RAILS_ENV
           value: test
+        - name: CC_TEST_REPORTER_ID
+          value: 1f7571edb01319043e28f29471b585e357bb6431f2c0a1f3bb6a32f7c91a3c28
       jobs:
         - name: Test Runner
           commands:
             - checkout
             - sem-service start postgres 11
             - sem-version ruby 3.0.0
-            - cache restore
-            - bundle install --deployment --path vendor/bundle
-            - cache store
-            - bundle exec rake db:create
-            - bundle exec rake db:migrate
-            - COVERALLS_REPO_TOKEN=add_token_here bundle exec rails ci:tests
+            - sem-service start elasticsearch 7.10.0
+            - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
+            - chmod +x ./cc-test-reporter
+            - ./cc-test-reporter before-build
+            - bundle update --bundler
+            - bundle install
+            - 'bundle exec rails db:create db:migrate'
+            - bundle exec rspec
+      epilogue:
+        always:
+          commands:
+            - ./cc-test-reporter format-coverage -t simplecov -o  coverage/.resultset.json
+        on_pass:
+          commands:
+            - ./cc-test-reporter after-build --exit-code 0
+        on_fail:
+          commands:
+            - ./cc-test-reporter after-build --exit-code 1
       secrets:
-        - name: RAILS_MASTER_KEY
-
+        - name: KCSC
