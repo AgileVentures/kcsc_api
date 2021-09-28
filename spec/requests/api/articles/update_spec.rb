@@ -5,6 +5,7 @@ RSpec.describe 'PUT /api/articles/:id' do
   let(:valid_auth_headers_for_user) { { HTTP_ACCEPT: 'application/json', API_KEY: api_key }.merge!(credentials) }
   let(:image) { create(:associated_image) }
   let(:article) { create(:article, image: image, author: user, published: false) }
+  let(:article_without_image) { create(:article, image: nil, author: user, published: false) }
 
   subject { response }
 
@@ -42,26 +43,47 @@ RSpec.describe 'PUT /api/articles/:id' do
         File.read(fixture_path + '/files/new_image.txt')
       end
 
-      before do
-        put "/api/articles/#{article.id}",
-            params: { article: { image: new_image, alt: 'new alt' } },
-            headers: valid_auth_headers_for_user
+      describe 'for article WITH an image' do
+        before do
+          put "/api/articles/#{article.id}",
+              params: { article: { image: new_image, alt: 'new alt' } },
+              headers: valid_auth_headers_for_user
+        end
+  
+        it 'is expected to response with status 200' do
+          expect(response).to have_http_status 200
+        end
+  
+        it 'is expected to have the new image attached' do
+          new_image_id = Article.find(article.id).image.file.attributes['id']
+          old_image_id = article.image.file.attributes['id']
+          expect(new_image_id).not_to eq old_image_id
+        end
+  
+        it 'is expected to update alt attribute' do
+          new_image_alt_text = Article.find(article.id).image.attributes['alt_text']
+          expect(new_image_alt_text).to eq 'new alt'
+        end
       end
 
-      it 'is expected to response with status 200' do
-        expect(response).to have_http_status 200
+      describe 'for article WITHOUT an image' do
+        before do
+          put "/api/articles/#{article_without_image.id}",
+              params: { article: { image: new_image, alt: 'new alt' } },
+              headers: valid_auth_headers_for_user
+        end
+  
+        it 'is expected to response with status 200' do
+          expect(response).to have_http_status 200
+        end
+  
+        it 'is expected to update alt attribute' do
+          new_image_alt_text = Article.find(article_without_image.id).image.attributes['alt_text']
+          expect(new_image_alt_text).to eq 'new alt'
+        end
       end
 
-      it 'is expected to have the new image attached' do
-        new_image_id = Article.find(article.id).image.file.attributes['id']
-        old_image_id = article.image.file.attributes['id']
-        expect(new_image_id).not_to eq old_image_id
-      end
 
-      it 'is expected to update alt attribute' do
-        new_image_alt_text = Article.find(article.id).image.attributes['alt_text']
-        expect(new_image_alt_text).to eq 'new alt'
-      end
     end
   end
 
