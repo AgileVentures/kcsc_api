@@ -12,6 +12,7 @@ RSpec.describe 'GET /api/articles/:id', type: :request do
     it { is_expected.to have_http_status 200 }
 
     it 'is expected to respond with the right article title' do
+      binding.pry
       expect(response_json['article'])
         .to have_key('title')
         .and have_value('My Awesome Article')
