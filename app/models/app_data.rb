@@ -1,7 +1,24 @@
 class AppData
   DATA_FILE = 'app_data.yml'
   def self.data
-    YAML.load_file(Rails.root.join('lib', DATA_FILE)).deep_symbolize_keys
+    if Rails.env.production?
+      Psych.load(s3_settings.body.read).deep_symbolize_keys
+    else
+      YAML.load_file(Rails.root.join('lib', DATA_FILE)).deep_symbolize_keys
+    end
+  end
+
+  def self.s3
+    if Rails.env.production?
+      Aws::S3::Resource.new(region: 'eu-north-1',
+                            access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
+                            secret_access_key: Rails.application.credentials.dig(:aws,
+                                                                                 :secret_access_key))
+    end
+  end
+
+  def self.s3_settings
+    s3.client.get_object bucket: 'kcsc-production', key: DATA_FILE if Rails.env.production?
   end
 
   def self.as_json
@@ -53,6 +70,14 @@ class AppData
                   end
     new_data = { **data[:app_data], **new_content }
     yaml = { app_data: new_data }.to_yaml
-    File.open(Rails.root.join('lib', DATA_FILE), 'w') { |f| f.write yaml }
+    write_to_app_data(yaml)
+  end
+
+  def self.write_to_app_data(yaml)
+    if Rails.env.production?
+      s3.client.put_object(bucket: 'kcsc-production', key: DATA_FILE, body: yaml)
+    else
+      File.open(Rails.root.join('lib', DATA_FILE), 'w') { |f| f.write yaml }
+    end
   end
 end
