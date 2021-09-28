@@ -30,3 +30,6 @@ storage/
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+#exclude app_data.yml
+lib/app_data.yml
+
