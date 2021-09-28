@@ -1,0 +1,148 @@
+---
+:app_data:
+  :testimonials:
+    - :id: 1
+      :name: Case 1
+      :text:
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      :photo: https://freerangestock.com/sample/114840/a-caucasian-woman-posing-with-a-smile.jpg
+      :alt: Maggie Black smiling to the camera
+      :link: /news_info/news/articles/1
+    - :id: 2
+      :name: Richard Erricson
+      :text:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
+      :photo: https://t3.ftcdn.net/jpg/01/15/46/70/360_F_115467073_9hWxkk2M8b4obn3Aq0JW3YDxtYt5nXqn.jpg
+      :alt: Richard Erricson smiling to the camera
+      :link: /news_info/news/articles/2
+  :navigation:
+    :main_tabs:
+      - label: home
+        link: '/home'
+        visible: true
+        secondary_tabs:
+      - label: services
+        link: '/services'
+        visible: true
+        secondary_tabs:
+          - label: Find a service
+            link: '/services'
+            ref: find-a-self-care-service
+            visible: true
+          - label: Long term Self Care
+            link: '/services'
+            ref: long-term-self-care
+            visible: true
+          - label: Mental health
+            link: '/services'
+            ref: mental-health
+            visible: true
+          - label: n.kensington self-care
+            link: '/services'
+            ref: north-kensington-self-care
+            visible: true
+          - label: find a link workers
+            link: '/services'
+            ref: find-a-link-workers
+            visible: true
+      - label: about
+        link: '/about/organization'
+        visible: true
+        secondary_tabs:
+          - label: organization
+            link: '/about/organization'
+            ref:
+            visible: true
+          - label: self care
+            link: '/about/self_care'
+            ref:
+            visible: true
+      - label: news & info
+        link: '/news_info/news'
+        visible: true
+        secondary_tabs:
+          - label: news
+            link: '/news_info/news'
+            ref:
+            visible: true
+          - label: information
+            link: '/news_info/information'
+            ref:
+            visible: true
+      - label: contact
+        link: '/contact'
+        visible: true
+        secondary_tabs:
+    :secondary_tabs:
+      - parent: services
+        label: Find a service
+        link: '/services'
+        ref: find-a-self-care-service
+      - parent: services
+        label: Long term Self Care
+        link: '/services'
+        ref: long-term-self-care
+      - parent: services
+        label: Mental health
+        link: '/services'
+        ref: mental-health
+      - parent: services
+        label: n.kensington self-care
+        link: '/services'
+        ref: north-kensington-self-care
+      - parent: services
+        label: find a link workers
+        link: '/services'
+        ref: find-a-link-workers
+      - parent: about
+        label: organization
+        link: '/about/organization'
+      - parent: about
+        label: self care
+        link: '/about/self_care'
+      - parent: news & info
+        label: news
+        link: '/news_info/news'
+      - parent: news & info
+        label: information
+        link: '/news_info/information'
+  :contact:
+    :email: info@communityhealthwestlondon.org.uk
+    :phone: 0207-243 9806
+    :form:
+      - :placeholder: Purpose of inquiry
+        :options:
+          - I have a question
+          - I want to donate
+          - I want to be a partner
+        :type: dropdown
+        :required: true
+        :dataKey: purpose
+      - :placeholder: Enter your name
+        :type: text
+        :required: true
+        :multiline: false
+        :dataKey: name
+      - :placeholder: Enter your email
+        :type: email
+        :required: true
+        :multiline: false
+        :dataKey: email
+      - :placeholder: Enter your message...
+        :type: text
+        :required: false
+        :multiline: true
+        :rows: 4
+        :dataKey: message
+  :tagline: Our aim is to improve people's health and well-being
+  :about:
+    Community Health West London is a Community Interest Company made up of
+    six local charities. We are working together with the wider community to improve
+    the health and wellbeing of our residents.
+  :disclaimers:
+    :copyright: 2021 All Rights Reserved by Community Health West London.
+    :accessability: This site is built according to Web Content Accessibility Guidelines
