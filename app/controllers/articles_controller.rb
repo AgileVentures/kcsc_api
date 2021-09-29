@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   def index
     articles = Article.all
     articles = articles.select { |article| article.published == true } unless current_user
-    articles = articles.sort_by { |article| article[:id] }
+    articles = articles.sort_by{ |article| article[:updated_at] }.reverse
     render json: articles, each_serializer: Article::IndexSerializer
   end
 
