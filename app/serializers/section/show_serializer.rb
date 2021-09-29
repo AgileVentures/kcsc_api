@@ -6,6 +6,7 @@ class Section::ShowSerializer < ActiveModel::Serializer
     hash[:buttons] = object.buttons if object.regular?
     hash[:description] = object.description unless object.carousel?
     hash[:cards] = object.cards if object.carousel?
+    hash[:image] = object.image if object.regular?
     hash 
   end
 end

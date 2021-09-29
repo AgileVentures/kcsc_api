@@ -5,11 +5,6 @@ broker = User.create(
   password: 'password'
 )
 
-puts 'creating image...'
-image_file = URI.open('https://assets.zyto.com/wp-content/uploads/2018/05/holistic-health-concept-woman-doing-yoga-on-beach-at-dusk.jpg')
-image = Image.create(alt_text: 'Alt attribute placeholder')
-image.file.attach(io: image_file, filename: 'article_image.jpg', content_type: 'image/jpg')
-
 # ---------- CREATING SECTONS FOR ABOUT US VIEW -----------
 puts 'creating sections for about_us view'
 background_and_setup = Section.create(
