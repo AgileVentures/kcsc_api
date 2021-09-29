@@ -5,39 +5,173 @@ broker = User.create(
   password: 'password'
 )
 
-puts 'creating views...'
-about_us_view = View.create(name: 'about_us', variant: 1)
-about_self_care_view = View.create(name: 'about_self_care', variant: 1)
-information_view = View.create(name: 'information', variant: 1)
-services_view = View.create(name: 'services', variant: 0)
-
 puts 'creating image...'
 image_file = URI.open('https://assets.zyto.com/wp-content/uploads/2018/05/holistic-health-concept-woman-doing-yoga-on-beach-at-dusk.jpg')
-image = Image.create(alt_text: 'Alt attribute')
+image = Image.create(alt_text: 'Alt attribute placeholder')
 image.file.attach(io: image_file, filename: 'article_image.jpg', content_type: 'image/jpg')
 
-puts 'creating sections...'
-section_regular = Section.create(
-  view_id: information_view.id,
-  header: 'Section regular',
-  description: 'A Solid App is composed of functions that we call Components. Component names in Solid follow the Pascal naming convention in which the first letter of each word in a component name is capitalized. This name can then be used as tags within our JSX like',
+# ---------- CREATING SECTONS FOR ABOUT US VIEW -----------
+puts 'creating sections for about_us view'
+background_and_setup = Section.create(
+  header: 'Background and Set-up',
+  description: 'his section tells vistor about Community Health West London background and setup',
   variant: 0,
   image: image
 )
-section_no_image = Section.create(
-  view_id: about_self_care_view.id,
-  header: 'Section no Image',
-  description: 'A Solid App is composed of functions that we call Components. Component names in Solid follow the Pascal naming convention in which the first letter of each word in a component name is capitalized. This name can then be used as tags within our JSX like',
+
+plans = Section.create(
+  header: 'Plans',
+  description: 'This section tells vistor Community Health West London plans to improve lives of people',
   variant: 1
 )
-section_carousel = Section.create(
-  view_id: about_us_view.id,
-  header: 'Section Carousel',
+
+work_with_us_btn = Cta.create(
+  text: 'Contact us',
+  link: '/contact'
+)
+work_with_us = Section.create(
+  header: 'Work with us',
+  description: 'This section tells vistor how beneficial it is to work with Community Health West London',
+  variant: 0,
+  image: image,
+  buttons: [work_with_us_btn]
+)
+
+our_partners = Section.create(
+  header: 'Our Partners',
+  cards: [],
   variant: 2
 )
-puts 'creating buttons...'
-buttons = Cta.create(
-  text: 'button',
-  link: 'https://github.com/AgileVentures/kcsc_api',
-  section_id: section_regular.id
+
+vcs_info_btn_1 = Cta.create(
+  text: 'KCSC Contact',
+  link: 'https://www.kcsc.org.uk/contact-us'
 )
+vcs_info_btn_2 = Cta.create(
+  text: 'KCSC Website',
+  link: 'https://www.kcsc.org.uk'
+)
+vcs_info = Section.create(
+  header: 'VCS info',
+  description: 'This section tells vistor about VCS',
+  variant: 0,
+  image: image,
+  buttons: [vcs_info_btn_1, vcs_info_btn_2]
+)
+
+about_us_sections = [background_and_setup, plans, work_with_us, our_partners, vcs_info]
+
+# ---------- CREATING SECTONS FOR ABOUT SELF CARE VIEW -----------
+puts 'creating sections for about_self_care view'
+
+self_care = Section.create(
+  header: 'Self Care',
+  description: 'This section tells vistor what is Self Care and how beneficial it is for them',
+  variant: 0,
+  image: image
+)
+
+social_prescribing = Section.create(
+  header: 'Social Prescribing',
+  description: 'This section tells vistor what is Social Prescribing and how beneficial it is for them',
+  variant: 0,
+  image: image
+)
+
+case_studies_kcsc = Section.create(
+  header: 'Case studies from KCSC',
+  description: 'This section spells out about results of case studies from KCSC',
+  variant: 1
+)
+
+case_studies_other = Section.create(
+  header: 'Case studies from other organisations',
+  description: 'This section spells out about results of case studies from other organisations',
+  variant: 1
+)
+
+about_self_care_sections = [self_care, social_prescribing, case_studies_kcsc, case_studies_other]
+
+# ---------- CREATING SECTONS FOR INFORMATION VIEW -----------
+puts 'creating sections for information view'
+
+information = Section.create(
+  header: 'Information',
+  description: 'On this page, you can find very usefull information about Self Care and Healthcare in West London',
+  variant: 0,
+  image: image
+)
+
+information_sections = [information]
+
+# ---------- CREATING SECTONS FOR SERVICES VIEW -----------
+puts 'creating sections for services view'
+
+find_self_care_service_btn = Cta.create(
+  text: 'Find self-care service',
+  link: '/services/search'
+)
+find_self_care_service = Section.create(
+  header: 'Find a Self-Care service',
+  description: 'Find local health and wellbeing services in the West London community.',
+  variant: 0,
+  image: image,
+  buttons: [find_self_care_service_btn]
+)
+
+long_term_self_care_btn = Cta.create(
+  text: 'my care my way',
+  link: 'http://mycaremyway.co.uk/'
+)
+long_term_self_care = Section.create(
+  header: 'Long term Self Care',
+  description: 'Need support with your long term health conditions & are registered for a GP surgery in West London? You can access My Care My Way through speaking to your GP.',
+  variant: 0,
+  image: image,
+  buttons: [long_term_self_care_btn]
+)
+
+mental_health_btn = Cta.create(
+  text: 'Take me there',
+  link: ''
+)
+mental_health = Section.create(
+  header: 'Mental health',
+  description: 'A referral to a service in the community to support peoples mental health.',
+  variant: 0,
+  image: image,
+  buttons: [mental_health_btn]
+)
+
+n_kensington_self_care_btn = Cta.create(
+  text: 'Take me there',
+  link: ''
+)
+n_kensington_self_care = Section.create(
+  header: 'North Kensington Self-Care',
+  description: 'A referral to services in the community to support people in North Kensington affected by the Grenfell Tower fire.',
+  variant: 0,
+  image: image,
+  buttons: [n_kensington_self_care_btn]
+)
+
+find_a_link_workers_btn = Cta.create(
+  text: 'Take me there',
+  link: ''
+)
+find_a_link_workers = Section.create(
+  header: 'Find a Link workers',
+  description: 'A Social Prescribing Link worker is someone based in a GP surgery that will link people up to services in their local community.',
+  variant: 0,
+  image: image,
+  buttons: [find_a_link_workers_btn]
+)
+
+services_sections = [find_self_care_service, long_term_self_care, mental_health, n_kensington_self_care,
+                     find_a_link_workers]
+
+puts 'creating views...'
+about_us_view = View.create(name: 'about_us', variant: 1, sections: about_us_sections)
+about_self_care_view = View.create(name: 'about_self_care', variant: 2, sections: about_self_care_sections)
+information_view = View.create(name: 'information', variant: 3, sections: information_sections)
+services_view = View.create(name: 'services', variant: 0, sections: services_sections)
