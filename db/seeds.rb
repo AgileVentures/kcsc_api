@@ -1,3 +1,8 @@
+puts 'clears old data...'
+[Section, Cta, View].each do | model |
+  model.destroy_all
+end
+
 puts 'generating intelligent life...'
 broker = User.create(
   email: 'admin@mail.com',
@@ -9,7 +14,7 @@ broker = User.create(
 puts 'creating sections for about_us view'
 background_and_setup = Section.create(
   header: 'Background and Set-up',
-  description: 'his section tells vistor about Community Health West London background and setup',
+  description: 'This section tells vistor about Community Health West London background and setup',
   variant: 0,
 )
 

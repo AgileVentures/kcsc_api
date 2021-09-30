@@ -15,10 +15,10 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
     end
   end
 
-  context ':regular' do    
+  context ':regular' do
     let(:sections) { create_list(:regular, 2, buttons: [create(:button)]) }
-    let!(:image_1) {create(:image, section: sections.first)}
-    let!(:image_2) {create(:image, section: sections.second)}
+    let!(:image_1) { create(:image, section: sections.first) }
+    let!(:image_2) { create(:image, section: sections.second) }
     it 'is expected to contain relevant keys for each object' do
       expected_keys = %w[variant header view_id id buttons description image]
       expect(subject['sections'].last.keys).to match expected_keys
