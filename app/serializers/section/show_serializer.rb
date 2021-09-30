@@ -1,5 +1,5 @@
 class Section::ShowSerializer < ActiveModel::Serializer
-  attributes :variant, :header, :view_id 
+  attributes :variant, :header, :view_id, :id 
 
   def attributes(*args)
     hash = super
