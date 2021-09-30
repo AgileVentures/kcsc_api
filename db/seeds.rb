@@ -11,7 +11,6 @@ background_and_setup = Section.create(
   header: 'Background and Set-up',
   description: 'his section tells vistor about Community Health West London background and setup',
   variant: 0,
-  image: image
 )
 
 plans = Section.create(
@@ -28,7 +27,6 @@ work_with_us = Section.create(
   header: 'Work with us',
   description: 'This section tells vistor how beneficial it is to work with Community Health West London',
   variant: 0,
-  image: image,
   buttons: [work_with_us_btn]
 )
 
@@ -50,7 +48,6 @@ vcs_info = Section.create(
   header: 'VCS info',
   description: 'This section tells vistor about VCS',
   variant: 0,
-  image: image,
   buttons: [vcs_info_btn_1, vcs_info_btn_2]
 )
 
@@ -63,14 +60,12 @@ self_care = Section.create(
   header: 'Self Care',
   description: 'This section tells vistor what is Self Care and how beneficial it is for them',
   variant: 0,
-  image: image
 )
 
 social_prescribing = Section.create(
   header: 'Social Prescribing',
   description: 'This section tells vistor what is Social Prescribing and how beneficial it is for them',
   variant: 0,
-  image: image
 )
 
 case_studies_kcsc = Section.create(
@@ -94,7 +89,6 @@ information = Section.create(
   header: 'Information',
   description: 'On this page, you can find very usefull information about Self Care and Healthcare in West London',
   variant: 0,
-  image: image
 )
 
 information_sections = [information]
@@ -110,7 +104,6 @@ find_self_care_service = Section.create(
   header: 'Find a Self-Care service',
   description: 'Find local health and wellbeing services in the West London community.',
   variant: 0,
-  image: image,
   buttons: [find_self_care_service_btn]
 )
 
@@ -122,7 +115,6 @@ long_term_self_care = Section.create(
   header: 'Long term Self Care',
   description: 'Need support with your long term health conditions & are registered for a GP surgery in West London? You can access My Care My Way through speaking to your GP.',
   variant: 0,
-  image: image,
   buttons: [long_term_self_care_btn]
 )
 
@@ -134,7 +126,6 @@ mental_health = Section.create(
   header: 'Mental health',
   description: 'A referral to a service in the community to support peoples mental health.',
   variant: 0,
-  image: image,
   buttons: [mental_health_btn]
 )
 
@@ -146,7 +137,6 @@ n_kensington_self_care = Section.create(
   header: 'North Kensington Self-Care',
   description: 'A referral to services in the community to support people in North Kensington affected by the Grenfell Tower fire.',
   variant: 0,
-  image: image,
   buttons: [n_kensington_self_care_btn]
 )
 
@@ -158,7 +148,6 @@ find_a_link_workers = Section.create(
   header: 'Find a Link workers',
   description: 'A Social Prescribing Link worker is someone based in a GP surgery that will link people up to services in their local community.',
   variant: 0,
-  image: image,
   buttons: [find_a_link_workers_btn]
 )
 
@@ -170,3 +159,11 @@ about_us_view = View.create(name: 'about_us', variant: 1, sections: about_us_sec
 about_self_care_view = View.create(name: 'about_self_care', variant: 2, sections: about_self_care_sections)
 information_view = View.create(name: 'information', variant: 3, sections: information_sections)
 services_view = View.create(name: 'services', variant: 0, sections: services_sections)
+
+puts 'attaching images...'
+sections = Section.all
+sections.each do |section|
+  image = Image.create(section: section)
+  file = File.open(Rails.root.join('spec', 'fixtures', 'files', 'placeholder.jpeg'))
+  image.file.attach(io: file, filename: 'placeholder.jpeg', content_type: 'image/jpg')
+end
