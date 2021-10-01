@@ -24,8 +24,9 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
       expect(subject['sections'].last.keys).to match expected_keys
     end
 
-    it 'is expected to contain attached image' do
-      expect(subject['sections'].first['image']['id']).to eq image_1.id
+    it 'is expected to contain image url' do
+      expected_extension = '.jpeg'
+      expect(subject['sections'].first['image']['url']).to include expected_extension
     end
   end
 
