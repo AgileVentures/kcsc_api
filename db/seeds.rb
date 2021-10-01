@@ -1,5 +1,5 @@
 puts 'clears old data...'
-[Section, Cta, View].each do | model |
+[Image, Section, Cta, View].each do | model |
   model.destroy_all
 end
 
