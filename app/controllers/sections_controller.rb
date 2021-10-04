@@ -13,11 +13,6 @@ class SectionsController < ApplicationController
 
   def update
     section = Section.find params[:id]
-    if section.regular?
-      ImageService.update(section, 'section', params[:section]) if params[:section][:image].present?
-      ButtonsService.update(params[:section][:buttons]) if params[:section].has_key?(:buttons)
-    end
-
     if section.update section_params
       render json: section, serializer: Section::ShowSerializer
     else
@@ -33,5 +28,9 @@ class SectionsController < ApplicationController
 
   def section_params
     params.require(:section).permit(:view_id, :header, :description)
+    if section.regular?
+      ImageService.update(section, 'section', params[:section]) if params[:section][:image].present?
+      ButtonsService.update(params[:section][:buttons]) if params[:section].has_key?(:buttons)
+    end
   end
 end
