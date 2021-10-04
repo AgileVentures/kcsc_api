@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
 
   def create
     article = Article.create(article_params.merge!(author: current_user))
-    if article.persisted? && attach_image(article)
+    if article.persisted? && ImageService.attach(article, 'article', params[:article])
       render json: article, serializer: Article::ShowSerializer, status: 201
     else
       render_error(article)
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
 
   def update
     article = Article.find(params[:id])
-    update_image(article) if params[:article][:image].present?
+    ImageService.update(article, 'article', params[:article]) if params[:article][:image].present?
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
     else
@@ -40,15 +40,5 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body, :published)
-  end
-
-  def attach_image(article)
-    params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article, alt_text: params[:article][:alt]))
-  end
-
-  def update_image(article)
-    article.image ||= Image.create(article: article, alt_text: params[:article][:alt])
-    DecodeService.attach_image(params[:article][:image], article.image) unless params[:article][:image].include? 'http'
-    article.image.update(alt_text: params[:article][:alt])
   end
 end

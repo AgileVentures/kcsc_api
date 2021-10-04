@@ -82,8 +82,6 @@ RSpec.describe 'PUT /api/articles/:id' do
           expect(new_image_alt_text).to eq 'new alt'
         end
       end
-
-
     end
   end
 
