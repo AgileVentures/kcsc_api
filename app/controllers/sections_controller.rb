@@ -13,7 +13,7 @@ class SectionsController < ApplicationController
 
   def update
     section = Section.find params[:id]
-    update_image(section) if params[:section][:image].present? && section.regular?
+    ImageService.update(section, 'section', params[:section]) if params[:section][:image].present? && section.regular?
     if section.update section_params
       render json: section, serializer: Section::ShowSerializer
     else
@@ -29,17 +29,5 @@ class SectionsController < ApplicationController
 
   def section_params
     params.require(:section).permit(:view_id, :header, :description)
-  end
-
-  def attach_image(section)
-    params[:section][:image].present? && DecodeService.attach_image(params[:section][:image],
-                                                                    Image.create(section: section,
-                                                                                 alt_text: params[:section][:alt]))
-  end
-
-  def update_image(section)
-    section.image ||= Image.create(section: section, alt_text: params[:section][:alt])
-    DecodeService.attach_image(params[:section][:image], section.image) unless params[:section][:image].include? 'http'
-    section.image.update(alt_text: params[:section][:alt])
-  end
+  end  
 end
