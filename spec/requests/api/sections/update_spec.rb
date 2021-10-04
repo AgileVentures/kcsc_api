@@ -1,7 +1,8 @@
 RSpec.describe 'PUT /sections/:id', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
-  let!(:section) { create(:section, header: 'old header') }
-  let!(:section_without_image) { create(:section, image: nil, header: 'regular without an image image') }
+  let(:image) { create(:image) }
+  let!(:section) { create(:section, variant: 0, image: image, header: 'old header') }
+  let!(:section_without_image) { create(:section, variant: 0, image: nil, header: 'regular without an image image') }
   let!(:section_no_image) { create(:section, variant: 1, header: 'section no_image') }
   let!(:section_carousel) { create(:section, variant: 2, header: 'section carousel') }
   let(:user) { create(:user) }
@@ -54,7 +55,7 @@ RSpec.describe 'PUT /sections/:id', type: :request do
       describe 'for section WITHOUT an image' do
         before do
           put "/api/sections/#{section_without_image.id}", params: { section: { image: new_image, alt: 'new alt' } },
-                                             headers: valid_auth_headers_for_user
+                                                           headers: valid_auth_headers_for_user
         end
 
         it 'is expected to respond with status 200' do
@@ -62,8 +63,7 @@ RSpec.describe 'PUT /sections/:id', type: :request do
         end
 
         it 'is expected to have the new image attached' do
-          attached_image = Section.find(section_without_image.id).image
-          expect(attached_image).to eq new_image
+          expect(Section.find(section_without_image.id).image).not_to eq nil
         end
 
         it 'is expected to update alt attribute' do
@@ -75,7 +75,7 @@ RSpec.describe 'PUT /sections/:id', type: :request do
       describe 'for section of type no_image' do
         before do
           put "/api/sections/#{section_no_image.id}", params: { section: { header: 'new header', image: new_image, alt: 'new alt' } },
-                                             headers: valid_auth_headers_for_user
+                                                      headers: valid_auth_headers_for_user
         end
 
         it 'is expected to respond with status 200' do
@@ -95,7 +95,7 @@ RSpec.describe 'PUT /sections/:id', type: :request do
       describe 'for section of type carousel' do
         before do
           put "/api/sections/#{section_carousel.id}", params: { section: { header: 'new header', image: new_image, alt: 'new alt' } },
-                                             headers: valid_auth_headers_for_user
+                                                      headers: valid_auth_headers_for_user
         end
 
         it 'is expected to respond with status 200' do
