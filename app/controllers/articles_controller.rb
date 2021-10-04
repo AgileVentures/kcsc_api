@@ -41,14 +41,4 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :body, :published)
   end
-
-  # def attach_image(article)
-  #   params[:article][:image].present? && DecodeService.attach_image(params[:article][:image], Image.create(article: article, alt_text: params[:article][:alt]))
-  # end
-
-  # def update_image(article)
-  #   article.image ||= Image.create(article: article, alt_text: params[:article][:alt])
-  #   DecodeService.attach_image(params[:article][:image], article.image) unless params[:article][:image].include? 'http'
-  #   article.image.update(alt_text: params[:article][:alt])
-  # end
 end
