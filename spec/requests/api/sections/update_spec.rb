@@ -2,6 +2,8 @@ RSpec.describe 'PUT /sections/:id', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let(:image) { create(:image) }
   let!(:section) { create(:section, variant: 0, image: image, header: 'old header') }
+  let!(:button_1) { create(:button, section: section, text: 'button_1 old text', link: 'button_1 old link') }
+  let!(:button_2) { create(:button, section: section, text: 'button_2 old text', link: 'button_2 old link') }
   let!(:section_without_image) { create(:section, variant: 0, image: nil, header: 'regular without an image image') }
   let!(:section_no_image) { create(:section, variant: 1, header: 'section no_image') }
   let!(:section_carousel) { create(:section, variant: 2, header: 'section carousel') }
@@ -110,6 +112,31 @@ RSpec.describe 'PUT /sections/:id', type: :request do
           attached_image = Section.find(section_carousel.id).image
           expect(attached_image).to eq nil
         end
+      end
+    end
+
+    describe 'by changing buttons' do
+      let(:new_buttons) do
+        [
+          { id: button_1.id, text: 'button_1 new text', link: 'button_1 new link' },
+          { id: button_2.id, text: 'button_2 new text', link: 'button_2 new link' }
+        ]
+      end
+      before do
+        put "/api/sections/#{section.id}", params: { section: { buttons: new_buttons } },
+                                           headers: valid_auth_headers_for_user
+      end
+
+      it 'is expected to respond with status 200' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'is expected to update first button' do
+        expect(response_json['section']['buttons'].first['text']).to eq 'button_1 new text'
+      end
+
+      it 'is expected to update second button' do
+        expect(response_json['section']['buttons'].second['text']).to eq 'button_2 new text'
       end
     end
   end
