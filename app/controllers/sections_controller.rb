@@ -1,4 +1,6 @@
 class SectionsController < ApplicationController
+  before_action :authenticate_user!, only: %i[create update]
+
   def index
     view = View.find_by_name params[:view]
     sections = view.sections
