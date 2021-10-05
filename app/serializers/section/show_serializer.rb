@@ -28,22 +28,13 @@ class Section::ShowSerializer < ActiveModel::Serializer
   end
 
   def list_of_cards
-    alt = nil
-    url = nil
     cards = Card.all
     cards.map do |card|
-      if card.image.present?
-        alt = card.image.alt_text
-        url = if Rails.env.test? || Rails.env.development?
-                rails_blob_path(card.image.file, only_path: true)
-              else
-                card.image.file.url(expires_in: 1.hour, disposition: 'inline')
-              end
-      end
+      image_environment(card) if card.image.present?
       {
         id: card.id,
-        logo: url,
-        alt: alt,
+        logo: @url,
+        alt: @alt,
         published: card.published,
         description: card.description,
         organization: card.organization,
@@ -53,5 +44,14 @@ class Section::ShowSerializer < ActiveModel::Serializer
         section_id: card.section_id
       }
     end
+  end
+
+  def image_environment(card)
+    @alt = card.image.alt_text
+    @url = if Rails.env.test? || Rails.env.development?
+             rails_blob_path(card.image.file, only_path: true)
+           else
+             card.image.file.url(expires_in: 1.hour, disposition: 'inline')
+           end
   end
 end
