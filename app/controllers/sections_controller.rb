@@ -2,8 +2,8 @@ class SectionsController < ApplicationController
   before_action :authenticate_user!, only: %i[create update]
 
   def index
-    view = View.find_by_name params[:view]
-    sections = view.sections
+    view = View.find_by_name params[:view]    
+    sections = view.sections.sort_by { |section| section[:created_at] }
 
     render json: sections, each_serializer: Section::ShowSerializer
   end
