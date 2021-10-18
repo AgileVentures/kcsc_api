@@ -26,8 +26,7 @@ RSpec.describe 'DELETE /api/app_data', type: :request do
   describe '#testimonials section' do
     describe 'sending in an existing testimonial' do
       before do
-        delete '/api/app_data', params: { key: 'testimonials',
-                                          value: { id: 1, foo: 'bar' } },
+        delete '/api/app_data', params: { id: 1 },
                                 headers: valid_auth_headers_for_user
       end
 
@@ -42,8 +41,7 @@ RSpec.describe 'DELETE /api/app_data', type: :request do
 
     describe 'sending in an non-existing id' do
       before do
-        delete '/api/app_data', params: { key: 'testimonials',
-                                          value: { id: 3, foo: 'fighters' } },
+        delete '/api/app_data', params: { id: 3 },
                                 headers: valid_auth_headers_for_user
       end
 

@@ -72,8 +72,9 @@ class AppData
     write_to_app_data(new_data)
   end
 
-  def self.delete(testimonial)
+  def self.delete(testimonial_id)
     testimonials = data[:app_data][:testimonials]
+    testimonial = testimonials.detect { |item| item[:id].to_i == testimonial_id }
     raise 'record not found' unless testimonials.include?(testimonial)
 
     testimonials.delete testimonial
