@@ -1,28 +1,33 @@
 class AppDataController < ApplicationController
-  before_action :authenticate_user!, only: [:update]
+  before_action :authenticate_user!, only: [:update, :destroy]
+  before_action :parse_params, only: [:update, :destroy]
   def show
     render json: AppData.as_json
   end
 
   def update
-    key = params[:key].to_sym
-    value = permitted_value
     begin
-      AppData.update(key, value)
-      render json: { message: "#{key} info has been updated" }
+      AppData.update(@key, @value)
+      render json: { message: "#{@key} info has been updated" }
     rescue StandardError => e
       render json: { error: e }, status: 422
     end
   end
 
-  def delete
-    testimonial_id = params[:testimonial][:id]
+  def destroy    
     begin      
-      AppData.delete(testimonial_id)
-      render json: { message: "Testimonial id:#{testimonial_id} has been deleted" }
+      AppData.delete(@value)
+      render json: { message: "Testimonial id:#{@value[:id]} has been deleted" }
     rescue StandardError => e
-      render json: { error: e }, status: 422
+      render json: { message: e.message }, status: 422
     end
+  end
+
+  private
+
+  def parse_params
+    @key = params[:key].to_sym
+    @value = permitted_value
   end
 
   def permitted_value

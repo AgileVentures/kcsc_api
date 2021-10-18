@@ -69,11 +69,20 @@ class AppData
                     { section => update }
                   end
     new_data = { **data[:app_data], **new_content }
-    yaml = { app_data: new_data }.to_yaml
-    write_to_app_data(yaml)
+    write_to_app_data(new_data)
   end
 
-  def self.write_to_app_data(yaml)
+  def self.delete(testimonial)
+    testimonials = data[:app_data][:testimonials]
+    raise 'record not found' unless testimonials.include?(testimonial)
+
+    testimonials.delete testimonial
+    new_data = { **data[:app_data], testimonials: testimonials }
+    write_to_app_data(new_data)
+  end
+
+  def self.write_to_app_data(new_data)
+    yaml = { app_data: new_data }.to_yaml
     if Rails.env.production?
       s3.client.put_object(bucket: 'kcsc-production', key: DATA_FILE, body: yaml)
     else

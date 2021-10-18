@@ -24,10 +24,11 @@ RSpec.describe 'DELETE /api/app_data', type: :request do
   after { reset_app_data }
 
   describe '#testimonials section' do
-    describe 'sending in an existing id' do
+    describe 'sending in an existing testimonial' do
       before do
-        put '/api/app_data', params: { testimonial: { id: 1 } },
-                             headers: valid_auth_headers_for_user
+        delete '/api/app_data', params: { key: 'testimonials',
+                                          value: { id: 1, foo: 'bar' } },
+                                headers: valid_auth_headers_for_user
       end
 
       it 'is expected to respond with status 200' do
@@ -41,8 +42,9 @@ RSpec.describe 'DELETE /api/app_data', type: :request do
 
     describe 'sending in an non-existing id' do
       before do
-        put '/api/app_data', params: { testimonial: { id: 3 } },
-                             headers: valid_auth_headers_for_user
+        delete '/api/app_data', params: { key: 'testimonials',
+                                          value: { id: 3, foo: 'fighters' } },
+                                headers: valid_auth_headers_for_user
       end
 
       it 'is expected to respond with status 422' do
@@ -50,7 +52,7 @@ RSpec.describe 'DELETE /api/app_data', type: :request do
       end
 
       it 'is expected to throw an error' do
-        expect(response).to eq 'record not found'
+        expect(response_json['message']).to eq 'record not found'
       end
     end
   end
