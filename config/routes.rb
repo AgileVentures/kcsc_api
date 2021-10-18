@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :services, only: :index
     resources :search, only: :create
     resources :articles, only: %i[index show create update]
-    resource :app_data, only: %i[show update]
+    resource :app_data, only: %i[show update destroy]
     resources :sections, only: %i[index create update]
     resources :information, only: %i[index create update show]
     resources :cards, only: %i[create update]
