@@ -15,6 +15,16 @@ class AppDataController < ApplicationController
     end
   end
 
+  def delete
+    testimonial_id = params[:testimonial][:id]
+    begin      
+      AppData.delete(testimonial_id)
+      render json: { message: "Testimonial id:#{testimonial_id} has been deleted" }
+    rescue StandardError => e
+      render json: { error: e }, status: 422
+    end
+  end
+
   def permitted_value
     if params[:value].is_a? String
       params[:value]
