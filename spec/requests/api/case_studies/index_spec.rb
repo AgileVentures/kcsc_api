@@ -12,7 +12,7 @@ RSpec.describe 'GET /api/articles', type: :request do
 
     it { is_expected.to have_http_status 200 }
 
-    it 'is expected to respond with a list of 6 articles' do
+    it 'is expected to respond with a list of 1 case study' do
       expect(response_json['case_studies'].count).to eq 1
     end
   end
