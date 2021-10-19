@@ -48,6 +48,20 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'scopes' do
+    let!(:article) { create(:article, case_study: false)}
+    let!(:case_study) { create(:article, case_study: true)}
+
+    describe 'default_scope' do
+      it 'is expected to return regular articles' do
+        expect(described_class.all).to_not include case_study
+      end
+    end
+
+    describe 'case_studies' do
+      it 'is expected to return case_studies' do
+        expect(described_class.case_studies).to_not include article
+      end
+    end
     
   end
 end
