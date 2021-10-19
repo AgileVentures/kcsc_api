@@ -17,4 +17,18 @@ RSpec.describe Article::IndexSerializer, type: :serializer do
     expected_keys = %w[id title teaser date image published author]
     expect(subject['articles'].last.keys).to match expected_keys
   end
+
+  describe 'custom root' do
+    let(:serialization) do
+      ActiveModelSerializers::SerializableResource.new(
+        articles,
+        each_serializer: described_class,
+        root: 'custom_value'
+      )
+    end
+
+    it 'is expected to wrap content in key reflecting the custom value' do
+      expect(subject.keys).to match ['custom_value']
+    end
+  end
 end
