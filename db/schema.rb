@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_065350) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "author_id"
     t.boolean "published", default: true
-    t.boolean "case_study"
+    t.boolean "case_study", default: false
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_065350) do
 
   create_table "cta", force: :cascade do |t|
     t.string "text"
-    t.string "link"
+    t.text "link"
     t.bigint "section_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

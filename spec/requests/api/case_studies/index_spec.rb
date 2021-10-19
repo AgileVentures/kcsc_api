@@ -7,13 +7,12 @@ RSpec.describe 'GET /api/articles', type: :request do
 
   describe 'with valid api key' do
     before do
-      get '/api/case_studies', headers: { API_KEY: api_key}
+      get '/api/case_studies', headers: { API_KEY: api_key }
     end
 
     it { is_expected.to have_http_status 200 }
 
     it 'is expected to respond with a list of 6 articles' do
-      
       expect(response_json['case_studies'].count).to eq 1
     end
   end
