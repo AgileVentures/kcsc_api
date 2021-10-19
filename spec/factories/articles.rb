@@ -4,5 +4,6 @@ FactoryBot.define do
     body { 'MyText' }
     published { true }
     association :author, factory: :user
+    case_study { false }
   end
 end

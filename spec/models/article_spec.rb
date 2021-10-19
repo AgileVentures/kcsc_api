@@ -46,4 +46,8 @@ RSpec.describe Article, type: :model do
         .of_type(:datetime)
     }
   end
+
+  describe 'scopes' do
+    
+  end
 end
