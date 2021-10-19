@@ -76,7 +76,7 @@ sections = [
         id: 1,
         publish: true,
         logo: "https://www.kcsc.org.uk/sites/kcsc.org.uk/themes/bootstrap_kcsc_2019/logo.png",
-        alt: "logo of Kensington & Chelsea Social Council organization",
+        alt: "logo of Kensington & Chelsea Social Council organisation",
         organization: "Kensington & Chelsea Social Council",
         description: "Description of what this partner does",
         links: {
@@ -89,7 +89,7 @@ sections = [
         id: 2,
         publish: true,
         logo: "https://scontent-arn2-2.xx.fbcdn.net/v/t31.18172-8/1119949_644130218939075_1717776792_o.jpg?_nc_cat=108&ccb=1-3&_nc_sid=6e5ad9&_nc_ohc=xV2RGd7fgnsAX-pFmUi&_nc_ht=scontent-arn2-2.xx&oh=f2a844537acc3a1ea5d5ee74efc8f5df&oe=6125A1A2",
-        alt: "logo of SMART organization",
+        alt: "logo of SMART organisation",
         organization: "SMART",
         description: "Description of what this partner does",
         links: {
@@ -102,7 +102,7 @@ sections = [
         id: 3,
         publish: true,
         logo: "https://www.openage.org.uk/sites/openage.org.uk/themes/openage/images/layout/logo.png",
-        alt: "logo of Open Age organization",
+        alt: "logo of Open Age organisation",
         organization: "Open Age",
         description: "Description of what this partner does",
         links: {
@@ -115,7 +115,7 @@ sections = [
         id: 4,
         publish: true,
         logo: "https://www.onewestminster.org.uk/themes/custom/ow_theme/images/logo.jpg",
-        alt: "logo of One Westminster organization",
+        alt: "logo of One Westminster organisation",
         organization: "One Westminster",
         description: "Description of what this partner does",
         links: {

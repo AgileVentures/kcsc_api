@@ -17,11 +17,33 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'Database' do
-    it { is_expected.to have_db_column(:title).of_type(:string) }
-    it { is_expected.to have_db_column(:body).of_type(:text) }
-    it { is_expected.to have_db_column(:published).of_type(:boolean) }
-    it { is_expected.to have_db_column(:author_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:created_at).of_type(:datetime) }
-    it { is_expected.to have_db_column(:updated_at).of_type(:datetime) }
+    it {
+      is_expected.to have_db_column(:title)
+        .of_type(:string)
+    }
+    it {
+      is_expected.to have_db_column(:body)
+        .of_type(:text)
+    }
+    it {
+      is_expected.to have_db_column(:published)
+        .of_type(:boolean)
+    }
+    it {
+      is_expected.to have_db_column(:case_study)
+        .of_type(:boolean)
+    }
+    it {
+      is_expected.to have_db_column(:author_id)
+        .of_type(:integer)
+    }
+    it {
+      is_expected.to have_db_column(:created_at)
+        .of_type(:datetime)
+    }
+    it {
+      is_expected.to have_db_column(:updated_at)
+        .of_type(:datetime)
+    }
   end
 end
