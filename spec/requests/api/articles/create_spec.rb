@@ -73,4 +73,20 @@ RSpec.describe 'POST /api/articles' do
       end
     end
   end
+
+  context 'creating a case_study entry' do
+    
+    before do
+      post '/api/articles',
+           params: { article:
+            { title: 'case study 1', body: 'This is a case study', case_study: true, image: image, alt: 'alt' } },
+           headers: valid_auth_headers_for_user
+    end
+
+    it { is_expected.to have_http_status(:created) }
+
+    it 'is expected to save an Article as case study' do
+      expect(response_json['article']['case_study']).to eq true
+    end
+  end
 end

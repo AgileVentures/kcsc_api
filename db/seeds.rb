@@ -1,21 +1,19 @@
 puts 'clears old data...'
-[Image, Section, Cta, View].each do | model |
+[Image, Section, Cta, View].each do |model|
   model.destroy_all
 end
 
 puts 'generating intelligent life...'
-broker = User.create(
-  email: 'admin@mail.com',
-  name: 'John Doe',
-  password: 'password'
-)
+broker = User.find_or_create_by(email: 'admin@mail.com') do |user|
+  user.update(name: 'John Doe', password: 'password')
+end
 
 # ---------- CREATING SECTONS FOR ABOUT US VIEW -----------
 puts 'creating sections for about_us view'
 background_and_setup = Section.create(
   header: 'Background and Set-up',
   description: 'This section tells vistor about Community Health West London background and setup',
-  variant: 0,
+  variant: 0
 )
 
 plans = Section.create(
@@ -64,13 +62,13 @@ puts 'creating sections for about_self_care view'
 self_care = Section.create(
   header: 'Self Care',
   description: 'This section tells vistor what is Self Care and how beneficial it is for them',
-  variant: 0,
+  variant: 0
 )
 
 social_prescribing = Section.create(
   header: 'Social Prescribing',
   description: 'This section tells vistor what is Social Prescribing and how beneficial it is for them',
-  variant: 0,
+  variant: 0
 )
 
 case_studies_kcsc = Section.create(
@@ -93,7 +91,7 @@ puts 'creating sections for information view'
 information = Section.create(
   header: 'Information',
   description: 'On this page, you can find very usefull information about Self Care and Healthcare in West London',
-  variant: 0,
+  variant: 0
 )
 
 information_sections = [information]

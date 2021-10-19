@@ -12,7 +12,7 @@ RSpec.describe Article::ShowSerializer, type: :serializer do
   end
 
   it 'is expected to contain relevant keys for the object' do
-    expected_keys = %w[id title body date image published author]
+    expected_keys = %w[id title body date image published case_study author]
     expect(subject['article'].keys).to match expected_keys
   end
 end
