@@ -1,6 +1,6 @@
 class Article::ShowSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :body, :date, :image, :published
+  attributes :id, :title, :body, :date, :image, :published, :case_study
   belongs_to :author, serializer: Users::Serializer
 
   def date
