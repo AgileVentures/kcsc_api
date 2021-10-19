@@ -14,7 +14,7 @@ RSpec.describe 'GET /api/articles', type: :request do
 
     it 'is expected to respond with a list of 6 articles' do
       
-      expect(response_json['articles'].count).to eq 1
+      expect(response_json['case_studies'].count).to eq 1
     end
   end
 end
