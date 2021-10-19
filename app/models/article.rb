@@ -5,4 +5,6 @@ class Article < ApplicationRecord
   has_one :image, dependent: :destroy
 
   default_scope { where(case_study: false) }
+
+  scope :case_studies, -> { unscoped.where(case_study: true) }
 end

@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :sections, only: %i[index create update]
     resources :information, only: %i[index create update show]
     resources :cards, only: %i[create update]
+    resources :case_studies, only: %i[index show]
   end
 end
