@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    article = Article.find(params[:id])
+    article = Article.unscoped.find(params[:id])
     render json: article, serializer: Article::ShowSerializer
   end
 
@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    article = Article.find(params[:id])
+    article = Article.unscoped.find(params[:id])
     ImageService.update(article, 'article', params[:article]) if params[:article][:image].present?
     if article.update(article_params)
       render json: article, serializer: Article::ShowSerializer
