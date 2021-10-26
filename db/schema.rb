@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_065350) do
+ActiveRecord::Schema.define(version: 2021_10_26_080401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_065350) do
     t.integer "variant"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "order", default: 0.0, null: false
     t.index ["view_id"], name: "index_sections_on_view_id"
   end
 

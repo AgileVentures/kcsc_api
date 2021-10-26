@@ -65,6 +65,7 @@ RSpec.describe Section, type: :model do
     it { is_expected.to have_db_column(:description).of_type(:text) }
     it { is_expected.to have_db_column(:variant).of_type(:integer) }
     it { is_expected.to have_db_column(:view_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:order).of_type(:float) }
   end
 
   describe 'Enums' do

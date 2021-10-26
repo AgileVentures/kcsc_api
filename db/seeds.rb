@@ -13,13 +13,22 @@ puts 'creating sections for about_us view'
 background_and_setup = Section.create(
   header: 'Background and Set-up',
   description: 'This section tells vistor about Community Health West London background and setup',
-  variant: 0
+  variant: 0,
+  order: 1
+)
+
+social_prescribing = Section.create(
+  header: 'Social Prescribing',
+  description: 'This section tells vistor what is Social Prescribing and how beneficial it is for them',
+  variant: 0,
+  order: 2
 )
 
 plans = Section.create(
   header: 'Plans',
   description: 'This section tells vistor Community Health West London plans to improve lives of people',
-  variant: 1
+  variant: 1,
+  order: 3
 )
 
 work_with_us_btn = Cta.create(
@@ -30,13 +39,15 @@ work_with_us = Section.create(
   header: 'Work with us',
   description: 'This section tells vistor how beneficial it is to work with Community Health West London',
   variant: 0,
-  buttons: [work_with_us_btn]
+  buttons: [work_with_us_btn],
+  order: 4
 )
 
 our_partners = Section.create(
   header: 'Our Partners',
   cards: [],
-  variant: 2
+  variant: 2,
+  order: 5
 )
 
 vcs_info_btn_1 = Cta.create(
@@ -47,43 +58,8 @@ vcs_info_btn_2 = Cta.create(
   text: 'KCSC Website',
   link: 'https://www.kcsc.org.uk'
 )
-vcs_info = Section.create(
-  header: 'VCS info',
-  description: 'This section tells vistor about VCS',
-  variant: 0,
-  buttons: [vcs_info_btn_1, vcs_info_btn_2]
-)
 
-about_us_sections = [background_and_setup, plans, work_with_us, our_partners, vcs_info]
-
-# ---------- CREATING SECTONS FOR ABOUT SELF CARE VIEW -----------
-puts 'creating sections for about_self_care view'
-
-self_care = Section.create(
-  header: 'Self Care',
-  description: 'This section tells vistor what is Self Care and how beneficial it is for them',
-  variant: 0
-)
-
-social_prescribing = Section.create(
-  header: 'Social Prescribing',
-  description: 'This section tells vistor what is Social Prescribing and how beneficial it is for them',
-  variant: 0
-)
-
-case_studies_kcsc = Section.create(
-  header: 'Case studies from KCSC',
-  description: 'This section spells out about results of case studies from KCSC',
-  variant: 1
-)
-
-case_studies_other = Section.create(
-  header: 'Case studies from other organisations',
-  description: 'This section spells out about results of case studies from other organisations',
-  variant: 1
-)
-
-about_self_care_sections = [self_care, social_prescribing, case_studies_kcsc, case_studies_other]
+about_us_sections = [background_and_setup, social_prescribing, plans, work_with_us, our_partners]
 
 # ---------- CREATING SECTONS FOR INFORMATION VIEW -----------
 puts 'creating sections for information view'
@@ -91,7 +67,8 @@ puts 'creating sections for information view'
 information = Section.create(
   header: 'Information',
   description: 'On this page, you can find very usefull information about Self Care and Healthcare in West London',
-  variant: 0
+  variant: 0,
+  order: 1
 )
 
 information_sections = [information]
@@ -107,7 +84,8 @@ find_self_care_service = Section.create(
   header: 'Find a Self-Care service',
   description: 'Find local health and wellbeing services in the West London community.',
   variant: 0,
-  buttons: [find_self_care_service_btn]
+  buttons: [find_self_care_service_btn],
+  order: 1
 )
 
 long_term_self_care_btn = Cta.create(
@@ -118,7 +96,8 @@ long_term_self_care = Section.create(
   header: 'Long term Self Care',
   description: 'Need support with your long term health conditions & are registered for a GP surgery in West London? You can access My Care My Way through speaking to your GP.',
   variant: 0,
-  buttons: [long_term_self_care_btn]
+  buttons: [long_term_self_care_btn],
+  order: 2
 )
 
 mental_health_btn = Cta.create(
@@ -129,7 +108,8 @@ mental_health = Section.create(
   header: 'Mental health',
   description: 'A referral to a service in the community to support peoples mental health.',
   variant: 0,
-  buttons: [mental_health_btn]
+  buttons: [mental_health_btn],
+  order: 3
 )
 
 n_kensington_self_care_btn = Cta.create(
@@ -140,7 +120,8 @@ n_kensington_self_care = Section.create(
   header: 'North Kensington Self-Care',
   description: 'A referral to services in the community to support people in North Kensington affected by the Grenfell Tower fire.',
   variant: 0,
-  buttons: [n_kensington_self_care_btn]
+  buttons: [n_kensington_self_care_btn],
+  order: 4
 )
 
 find_a_link_workers_btn = Cta.create(
@@ -151,7 +132,8 @@ find_a_link_workers = Section.create(
   header: 'Find a Link workers',
   description: 'A Social Prescribing Link worker is someone based in a GP surgery that will link people up to services in their local community.',
   variant: 0,
-  buttons: [find_a_link_workers_btn]
+  buttons: [find_a_link_workers_btn],
+  order: 5
 )
 
 services_sections = [find_self_care_service, long_term_self_care, mental_health, n_kensington_self_care,
@@ -159,7 +141,6 @@ services_sections = [find_self_care_service, long_term_self_care, mental_health,
 
 puts 'creating views...'
 about_us_view = View.create(name: 'about_us', variant: 1, sections: about_us_sections)
-about_self_care_view = View.create(name: 'about_self_care', variant: 2, sections: about_self_care_sections)
 information_view = View.create(name: 'information', variant: 3, sections: information_sections)
 services_view = View.create(name: 'services', variant: 0, sections: services_sections)
 

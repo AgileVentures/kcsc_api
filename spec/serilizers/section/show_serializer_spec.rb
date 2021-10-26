@@ -20,7 +20,7 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
     let!(:image_1) { create(:image, section: sections.first) }
     let!(:image_2) { create(:image, section: sections.second) }
     it 'is expected to contain relevant keys for each object' do
-      expected_keys = %w[variant header view_id id buttons description image]
+      expected_keys = %w[variant header view_id id order buttons description image]
       expect(subject['sections'].last.keys).to match expected_keys
     end
 
@@ -33,7 +33,7 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
   context ':no_image' do
     let(:sections) { create_list(:no_image, 2) }
     it 'is expected to contain relevant keys for each object' do
-      expected_keys = %w[variant header view_id id description]
+      expected_keys = %w[variant header view_id id order description]
       expect(subject['sections'].last.keys).to match expected_keys
     end
   end
@@ -41,7 +41,7 @@ RSpec.describe Section::ShowSerializer, type: :serializer do
   context ':carousel' do
     let(:sections) { create_list(:carousel, 2, cards: [create(:card)]) }
     it 'is expected to contain relevant keys for each object' do
-      expected_keys = %w[variant header view_id id cards]
+      expected_keys = %w[variant header view_id id order cards]
       expect(subject['sections'].last.keys).to match expected_keys
     end
   end
