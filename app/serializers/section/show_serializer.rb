@@ -1,6 +1,6 @@
 class Section::ShowSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :variant, :header, :view_id, :id
+  attributes :variant, :header, :view_id, :id, :order
 
   def attributes(*args)
     hash = super

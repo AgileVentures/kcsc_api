@@ -2,8 +2,9 @@ RSpec.describe 'GET /sections?view=:view_name', type: :request do
   let!(:api_key) { Rails.application.credentials.client_api_keys[0] }
   let!(:about_view) { create(:view, name: 'about') }
   let!(:sections) do
-    create_list(:section, 2, view: about_view, variant: :regular) do |section, i|
+    build_list(:section, 2, view: about_view, variant: :no_image) do |section, i|
       section.order = 2 - i
+      section.save!
     end
   end
 
@@ -21,7 +22,24 @@ RSpec.describe 'GET /sections?view=:view_name', type: :request do
     end
 
     it 'is expected to return a list of sections sorted by order' do
-      expected_outcome = [{ order: 1 }, { order: 2 }]
+      expected_outcome = [
+        {
+          'description' => 'MyText',
+          'header' => 'MyString',
+          'id' => sections.second.id,
+          'order' => 1.0,
+          'variant' => 'no_image',
+          'view_id' => about_view.id
+        },
+        {
+          'description' => 'MyText',
+          'header' => 'MyString',
+          'id' => sections.first.id,
+          'order' => 2.0,
+          'variant' => 'no_image',
+          'view_id' => about_view.id
+        }
+      ]
       expect(response_json['sections']).to eq(expected_outcome)
     end
   end
